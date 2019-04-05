@@ -14,7 +14,7 @@ describe('[api] categories', () => {
       expect(posts.length).toBeGreaterThanOrEqual(0);
     };
 
-    return getPostFromCategory('redux').then(testCondition);
+    return getPostFromCategory('react').then(testCondition);
   });
 
   test('[getPostFromCategory capturando posts de uma categoria inexistênte', () => {

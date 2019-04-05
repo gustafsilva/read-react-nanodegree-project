@@ -18,8 +18,10 @@ import {
   editPost,
   deletePost,
 } from './posts';
+import { ERROR_API } from './utils';
 
 export default {
+  ERROR_API,
   getCategories,
   getPostFromCategory,
   getCommentsFromPost,
