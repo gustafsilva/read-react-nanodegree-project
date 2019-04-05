@@ -11,7 +11,7 @@ describe('[api] categories', () => {
 
   test('[getPostFromCategory] capturando posts de categoria existênte', () => {
     const testCondition = (posts) => {
-      expect(posts.length).toBeGreaterThan(0);
+      expect(posts.length).toBeGreaterThanOrEqual(0);
     };
 
     return getPostFromCategory('redux').then(testCondition);
