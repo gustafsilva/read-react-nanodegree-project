@@ -1,5 +1,5 @@
 import {
-  getPosts,
+  fetchPosts,
   getPost,
   addPost,
   votePost,
@@ -9,12 +9,12 @@ import {
 import { ERROR_API } from '../utils';
 
 describe('[api] posts', () => {
-  test('[getPosts] verificando tipo da resposta e tamanho', () => {
+  test('[fetchPosts] verificando tipo da resposta e tamanho', () => {
     const testCondition = (posts) => {
       expect(posts.length).toBeGreaterThanOrEqual(0);
     };
 
-    return getPosts().then(testCondition);
+    return fetchPosts().then(testCondition);
   });
 
   test('[getPost] verificando com post existênte', () => {

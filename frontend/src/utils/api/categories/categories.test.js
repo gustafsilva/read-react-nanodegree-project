@@ -1,12 +1,12 @@
-import { getCategories, getPostFromCategory } from './index';
+import { fetchCategories, getPostFromCategory } from './index';
 
 describe('[api] categories', () => {
-  test('[getCategories] capturando todas as categorias', () => {
+  test('[fetchCategories] capturando todas as categorias', () => {
     const testCondition = (categories) => {
       expect(categories.length).toBeGreaterThan(0);
     };
 
-    return getCategories().then(testCondition);
+    return fetchCategories().then(testCondition);
   });
 
   test('[getPostFromCategory] capturando posts de categoria existênte', () => {

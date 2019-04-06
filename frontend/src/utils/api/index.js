@@ -1,5 +1,5 @@
 import {
-  getCategories,
+  fetchCategories,
   getPostFromCategory,
 } from './categories';
 import {
@@ -11,7 +11,7 @@ import {
   deleteComment,
 } from './comments';
 import {
-  getPosts,
+  fetchPosts,
   getPost,
   addPost,
   votePost,
@@ -20,9 +20,9 @@ import {
 } from './posts';
 import { ERROR_API } from './utils';
 
-export default {
+export {
   ERROR_API,
-  getCategories,
+  fetchCategories,
   getPostFromCategory,
   getCommentsFromPost,
   getComment,
@@ -30,7 +30,7 @@ export default {
   voteComment,
   editComment,
   deleteComment,
-  getPosts,
+  fetchPosts,
   getPost,
   addPost,
   votePost,

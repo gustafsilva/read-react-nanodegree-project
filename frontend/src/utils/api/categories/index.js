@@ -6,7 +6,7 @@ import {
   returnError,
 } from '../utils';
 
-export const getCategories = () => (
+export const fetchCategories = () => (
   fetch(`${BASE_API}/categories`, headers)
     .then(convertJSON)
     .then(checkError)

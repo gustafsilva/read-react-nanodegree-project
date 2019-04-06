@@ -7,7 +7,7 @@ import {
   returnError,
 } from '../utils';
 
-export const getPosts = () => (
+export const fetchPosts = () => (
   fetch(`${BASE_API}/posts`, headers)
     .then(convertJSON)
     .then(checkError)
