@@ -14,6 +14,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import MenuIcon from '@material-ui/icons/Menu';
 import AddIcon from '@material-ui/icons/Add';
 
+import Link from 'components/hocs/Link';
 import MenuCategories from './MenuCategories';
 import MenuMobile from './MenuMobile';
 
@@ -69,6 +70,7 @@ const NavBar = (props) => {
     handleMenuOpen,
     handleMenuClose,
     handleMobileMenuOpen,
+    handleNewPostSectionOpen,
   } = props;
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -78,13 +80,15 @@ const NavBar = (props) => {
       <AppBar position="static">
         <Toolbar>
           <Typography className={classes.title} variant="h6" color="inherit" noWrap>
-            Leitura React
+            Readable React
           </Typography>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <IconButton color="inherit">
-              <HomeIcon />
-            </IconButton>
+            <Link to="/">
+              <IconButton color="inherit">
+                <HomeIcon />
+              </IconButton>
+            </Link>
             <IconButton
               aria-owns={isMenuOpen ? 'material-appbar' : undefined}
               aria-haspopup="true"
@@ -93,7 +97,7 @@ const NavBar = (props) => {
             >
               <MenuIcon />
             </IconButton>
-            <IconButton color="inherit">
+            <IconButton onClick={handleNewPostSectionOpen} color="inherit">
               <AddIcon />
             </IconButton>
           </div>
@@ -115,6 +119,7 @@ const NavBar = (props) => {
         isMobileMenuOpen={isMobileMenuOpen}
         handleMenuOpen={handleMenuOpen}
         handleMenuClose={handleMenuClose}
+        handleNewPostSectionOpen={handleNewPostSectionOpen}
       />
     </div>
   );
@@ -133,6 +138,7 @@ NavBar.propTypes = {
   handleMenuOpen: PropTypes.func.isRequired,
   handleMenuClose: PropTypes.func.isRequired,
   handleMobileMenuOpen: PropTypes.func.isRequired,
+  handleNewPostSectionOpen: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(NavBar);

@@ -21,6 +21,11 @@ class Header extends Component {
     this.setState({ mobileMoreAnchorEl: event.currentTarget });
   };
 
+  handleNewPostSectionOpen = () => {
+    this.handleMenuClose();
+    console.log('implentar janela de novo post');
+  }
+
   render() {
     const { anchorEl, mobileMoreAnchorEl } = this.state;
     const categories = [
@@ -43,6 +48,7 @@ class Header extends Component {
           handleMenuOpen={this.handleMenuOpen}
           handleMenuClose={this.handleMenuClose}
           handleMobileMenuOpen={this.handleMobileMenuOpen}
+          handleNewPostSectionOpen={this.handleNewPostSectionOpen}
         />
       </header>
     );

@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Menu, MenuItem } from '@material-ui/core';
 
+import Link from 'components/hocs/Link';
+
 const MenuCategories = ({ categories, anchorEl, isMenuOpen, handleMenuClose }) => (
   anchorEl !== null && (
     <Menu
@@ -13,7 +15,11 @@ const MenuCategories = ({ categories, anchorEl, isMenuOpen, handleMenuClose }) =
     >
       <MenuItem onClick={handleMenuClose} disabled>Categories</MenuItem>
       {categories.map(category => (
-        <MenuItem onClick={handleMenuClose} key={category.path}>{category.name}</MenuItem>
+        <Link to={`/${category.path}`} key={category.path} color="black">
+          <MenuItem onClick={handleMenuClose}>
+            {category.name}
+          </MenuItem>
+        </Link>
       ))}
     </Menu>
   )
