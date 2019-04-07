@@ -23,7 +23,7 @@ const styles = theme => ({
     width: '100%',
   },
   navBar: {
-    backgroundColor: 'purple',
+    backgroundColor: '#315EE0',
   },
   grow: {
     flexGrow: 1,
