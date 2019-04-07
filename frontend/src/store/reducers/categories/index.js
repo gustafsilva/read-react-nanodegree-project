@@ -2,7 +2,9 @@ import {
   GET_CATEGORIES,
 } from 'store/actions/categories';
 
-const categories = (state = [], action) => {
+export const INIT_STATE = [];
+
+const categories = (state = INIT_STATE, action) => {
   switch (action.type) {
     case GET_CATEGORIES:
       return {
@@ -12,6 +14,6 @@ const categories = (state = [], action) => {
     default:
       return state;
   }
-}
+};
 
 export default categories;

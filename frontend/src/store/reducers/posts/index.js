@@ -2,7 +2,9 @@ import {
   GET_POSTS,
 } from 'store/actions/posts';
 
-const posts = (state = [], action) => {
+export const INIT_STATE = [];
+
+const posts = (state = INIT_STATE, action) => {
   switch (action.type) {
     case GET_POSTS:
       return {
