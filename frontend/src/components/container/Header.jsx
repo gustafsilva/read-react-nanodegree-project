@@ -23,6 +23,7 @@ class Header extends Component {
 
   handleNewPostSectionOpen = () => {
     this.handleMenuClose();
+    // eslint-disable-next-line no-console
     console.log('implentar janela de novo post');
   }
 

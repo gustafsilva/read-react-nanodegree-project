@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
+import LoadingBar from 'react-redux-loading-bar';
 
 import Header from 'components/container/Header';
 import HomePage from 'pages/HomePage';
@@ -17,23 +18,35 @@ class App extends Component {
   }
 
   render() {
+    const { loading } = this.props;
+
     return (
-      <Router>
-        <div>
-          <Header />
-          <div className="content">
-            <Route path="/" exact component={HomePage} />
-            <Route path="/:category" exact component={PostsByCategoryPage} />
-            <Route path="/:category/:post_id" exact component={PostDetailPage} />
-          </div>
-        </div>
-      </Router>
+      <div>
+        <LoadingBar />
+        <Router>
+          {loading !== false && (
+            <div>
+              <Header />
+              <div className="content">
+                <Route path="/" exact component={HomePage} />
+                <Route path="/:category" exact component={PostsByCategoryPage} />
+                <Route path="/:category/:post_id" exact component={PostDetailPage} />
+              </div>
+            </div>
+          )}
+        </Router>
+      </div>
     );
   }
 }
 
+const mapStateToProps = ({ categories, posts }) => ({
+  loading: Object.keys(categories).length > 0 && Object.keys(posts).length >= 0,
+});
+
 App.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
-export default connect()(App);
+export default connect(mapStateToProps)(App);

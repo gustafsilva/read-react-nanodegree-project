@@ -22,6 +22,9 @@ const styles = theme => ({
   root: {
     width: '100%',
   },
+  navBar: {
+    backgroundColor: 'purple',
+  },
   grow: {
     flexGrow: 1,
   },
@@ -77,7 +80,7 @@ const NavBar = (props) => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" className={classes.navBar}>
         <Toolbar>
           <Typography className={classes.title} variant="h6" color="inherit" noWrap>
             Readable React
