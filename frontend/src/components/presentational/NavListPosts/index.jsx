@@ -17,32 +17,41 @@ const styles = theme => ({
   },
 });
 
-const NavListPost = ({ classes, title, filter, handleChangeFilter }) => (
-  <Grid container>
-    <Grid item xs={6} md={8}>
-      <Typography variant="h3">{title}</Typography>
-    </Grid>
+const NavListPost = (props) => {
+  const {
+    classes,
+    title,
+    filter,
+    handleChangeFilter,
+  } = props;
 
-    <Grid item xs={6} md={4}>
-      <Grid container direction="row" justify="flex-end">
-        <FormControl variant="outlined" className={classes.formControl}>
-          <InputLabel htmlFor="filterPosts">
-            Filter
-          </InputLabel>
-          <Select
-            native
-            value={filter}
-            onChange={handleChangeFilter}
-            input={<OutlinedInput name="filterPosts" labelWidth={120} id="filterPosts" />}
-          >
-            <option value="votes">Votes</option>
-            <option value="date">Date</option>
-          </Select>
-        </FormControl>
+  return (
+    <Grid container>
+      <Grid item xs={6} md={8}>
+        <Typography variant="h3">{title}</Typography>
+      </Grid>
+
+      <Grid item xs={6} md={4}>
+        <Grid container direction="row" justify="flex-end">
+          <FormControl variant="outlined" className={classes.formControl}>
+            <InputLabel htmlFor="filterPosts">
+              Filter
+            </InputLabel>
+            <Select
+              native
+              value={filter}
+              onChange={handleChangeFilter}
+              input={<OutlinedInput name="filterPosts" labelWidth={120} id="filterPosts" />}
+            >
+              <option value="votes">Votes</option>
+              <option value="date">Date</option>
+            </Select>
+          </FormControl>
+        </Grid>
       </Grid>
     </Grid>
-  </Grid>
-);
+  );
+};
 
 NavListPost.defaultProps = {
   title: 'Posts',

@@ -4,8 +4,7 @@ import { connect } from 'react-redux';
 import { Grid } from '@material-ui/core';
 
 import NavListPosts from 'components/presentational/NavListPosts';
-import List from 'components/presentational/ListPosts';
-
+import PostThumbnail from 'components/presentational/PostThumbnail';
 
 class ListPosts extends Component {
   state = {
@@ -24,6 +23,11 @@ class ListPosts extends Component {
     const { filter } = this.state;
     const { posts } = this.props;
 
+    let postsFilted = posts.filter(post => post.deleted === false);
+    postsFilted = filter === 'votes'
+      ? postsFilted.sort((a, b) => b.voteScore - a.voteScore)
+      : postsFilted.sort((a, b) => b.timestamp - a.timestamp);
+
     return (
       <Grid container>
         <NavListPosts
@@ -31,7 +35,18 @@ class ListPosts extends Component {
           handleChangeFilter={this.handleChangeFilter}
         />
 
-        <List posts={posts} />
+        <Grid container direction="row">
+          {postsFilted.map(post => (
+            <PostThumbnail
+              key={post.id}
+              title={post.title}
+              author={post.author}
+              body={post.body}
+              commentCount={post.commentCount}
+              voteScore={post.voteScore}
+            />
+          ))}
+        </Grid>
       </Grid>
     );
   }

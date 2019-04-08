@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import NavBar from 'components/presentational/NavBar';
 
@@ -29,16 +31,7 @@ class Header extends Component {
 
   render() {
     const { anchorEl, mobileMoreAnchorEl } = this.state;
-    const categories = [
-      {
-        name: 'react',
-        path: 'react',
-      },
-      {
-        name: 'redux',
-        path: 'redux',
-      },
-    ];
+    const { categories } = this.props;
 
     return (
       <header>
@@ -56,4 +49,12 @@ class Header extends Component {
   }
 }
 
-export default Header;
+Header.propTypes = {
+  categories: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
+
+const mapStateToProps = ({ categories }) => ({
+  categories,
+});
+
+export default connect(mapStateToProps)(Header);

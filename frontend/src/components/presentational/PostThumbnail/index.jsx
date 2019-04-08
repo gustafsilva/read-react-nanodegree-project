@@ -21,6 +21,9 @@ const styles = {
     marginTop: 20,
     marginLeft: 10,
   },
+  body: {
+    minHeight: 45,
+  },
   actions: {
     display: 'flex',
   },
@@ -29,7 +32,7 @@ const styles = {
   },
 };
 
-const Post = (props) => {
+const PostThumbnail = (props) => {
   const {
     classes,
     title,
@@ -47,7 +50,7 @@ const Post = (props) => {
         action={<IconButton><MoreVertIcon /></IconButton>}
       />
       <CardContent>
-        <Typography component="p">
+        <Typography component="p" className={classes.body}>
           {body}
         </Typography>
       </CardContent>
@@ -71,7 +74,7 @@ const Post = (props) => {
   );
 };
 
-Post.propTypes = {
+PostThumbnail.propTypes = {
   classes: PropTypes.objectOf(PropTypes.string).isRequired,
   title: PropTypes.string.isRequired,
   author: PropTypes.string.isRequired,
@@ -80,4 +83,4 @@ Post.propTypes = {
   voteScore: PropTypes.number.isRequired,
 };
 
-export default withStyles(styles)(Post);
+export default withStyles(styles)(PostThumbnail);
