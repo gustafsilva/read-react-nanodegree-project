@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Grid } from '@material-ui/core';
 
 import NavListPosts from 'components/presentational/NavListPosts';
-import PostThumbnail from 'components/presentational/PostThumbnail';
+import PostThumbnail from 'components/container/PostThumbnail';
 
 class ListPosts extends Component {
   state = {
@@ -39,11 +39,7 @@ class ListPosts extends Component {
           {postsFilted.map(post => (
             <PostThumbnail
               key={post.id}
-              title={post.title}
-              author={post.author}
-              body={post.body}
-              commentCount={post.commentCount}
-              voteScore={post.voteScore}
+              id={post.id}
             />
           ))}
         </Grid>
@@ -57,6 +53,7 @@ ListPosts.defaultProps = {
 };
 
 ListPosts.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   posts: PropTypes.arrayOf(PropTypes.object),
 };
 
