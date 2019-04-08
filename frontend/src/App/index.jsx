@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import LoadingBar from 'react-redux-loading-bar';
 
 import LoadingApp from 'components/presentational/LoadingApp';
+import Content from 'components/presentational/Content';
 import Header from 'components/container/Header';
 import HomePage from 'pages/HomePage';
 import PostsByCategoryPage from 'pages/PostsByCategoryPage';
@@ -30,11 +31,11 @@ class App extends Component {
         <Fragment>
           <LoadingBar />
           <Header />
-          <div className="content">
+          <Content>
             <Route path="/" exact component={HomePage} />
             <Route path="/:category" exact component={PostsByCategoryPage} />
             <Route path="/:category/:post_id" exact component={PostDetailPage} />
-          </div>
+          </Content>
         </Fragment>
       </Router>
     );

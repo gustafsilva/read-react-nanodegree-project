@@ -1,9 +1,9 @@
 import React from 'react';
 
+import ListPosts from 'components/container/ListPosts';
+
 const HomePage = () => (
-  <div>
-    HomePage
-  </div>
+  <ListPosts />
 );
 
 export default HomePage;

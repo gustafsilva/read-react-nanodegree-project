@@ -7,10 +7,7 @@ export const INIT_STATE = [];
 const categories = (state = INIT_STATE, action) => {
   switch (action.type) {
     case GET_CATEGORIES:
-      return {
-        ...state,
-        ...action.categories,
-      };
+      return action.categories;
     default:
       return state;
   }
