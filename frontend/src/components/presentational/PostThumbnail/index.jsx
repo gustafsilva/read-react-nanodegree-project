@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   withStyles,
+  Grid,
   Card,
   CardHeader,
   CardContent,
@@ -13,7 +14,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import UpIcon from '@material-ui/icons/ThumbUp';
 import DownIcon from '@material-ui/icons/ThumbDown';
-
+import CommentIcon from '@material-ui/icons/Comment';
 
 const styles = {
   card: {
@@ -27,8 +28,17 @@ const styles = {
   actions: {
     display: 'flex',
   },
-  expand: {
-    marginLeft: 'auto',
+  voteUp: {
+    color: 'green',
+  },
+  voteDown: {
+    color: 'red',
+  },
+  voteScore: {
+    color: 'red',
+  },
+  lenComment: {
+    color: 'blue',
   },
 };
 
@@ -55,20 +65,31 @@ const PostThumbnail = (props) => {
         </Typography>
       </CardContent>
       <CardActions className={classes.actions} disableActionSpacing>
-        <IconButton aria-label="Add to favorites">
-          <UpIcon />
+        <IconButton aria-label="Vote Up">
+          <UpIcon className={classes.voteUp} />
         </IconButton>
-        <IconButton aria-label="Add to favorites">
-          <DownIcon />
+        <IconButton aria-label="Vote Down">
+          <DownIcon className={classes.voteDown} />
         </IconButton>
 
-        <IconButton
-          className={classes.expand}
-          aria-label="Show more"
-        >
-          <FavoriteIcon />
-          <Typography>{voteScore}</Typography>
-        </IconButton>
+        <Grid container direction="row-reverse" justify="flex-start">
+          <IconButton
+            aria-label="Vote Score"
+            color="secondary"
+            disabled
+          >
+            <FavoriteIcon className={classes.voteScore} />
+            <Typography variant="caption">{voteScore}</Typography>
+          </IconButton>
+          <IconButton
+            aria-label="Vote Score"
+            color="secondary"
+            disabled
+          >
+            <CommentIcon className={classes.lenComment} />
+            <Typography variant="caption">{commentCount}</Typography>
+          </IconButton>
+        </Grid>
       </CardActions>
     </Card>
   );
