@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Menu, MenuItem } from '@material-ui/core';
+import camelToTitle from '@cahil/utils/transforms/camelToTitle';
 
 import Link from 'components/hocs/Link';
 
@@ -17,7 +18,7 @@ const MenuCategories = ({ categories, anchorEl, isMenuOpen, handleMenuClose }) =
       {categories.map(category => (
         <Link to={`/${category.path}`} key={category.path} color="black">
           <MenuItem onClick={handleMenuClose}>
-            {category.name}
+            {camelToTitle(category.name)}
           </MenuItem>
         </Link>
       ))}
