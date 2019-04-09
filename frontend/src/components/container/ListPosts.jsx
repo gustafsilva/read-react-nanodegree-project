@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Grid } from '@material-ui/core';
+import camelToTitle from '@cahil/utils/transforms/camelToTitle';
 
 import NavListPosts from 'components/presentational/NavListPosts';
 import PostThumbnail from 'components/container/PostThumbnail';
@@ -27,8 +28,12 @@ class ListPosts extends Component {
 
   render() {
     const { filter, editPostId, openEditPost } = this.state;
-    const { posts } = this.props;
+    const { posts, category } = this.props;
     let postsFilted = posts.filter(post => post.deleted === false);
+
+    if (category !== '') {
+      postsFilted = postsFilted.filter(post => post.category === category);
+    }
 
     postsFilted = filter === 'votes'
       ? postsFilted.sort((a, b) => b.voteScore - a.voteScore)
@@ -39,6 +44,7 @@ class ListPosts extends Component {
         <NavListPosts
           filter={filter}
           handleChangeFilter={this.handleChangeFilter}
+          title={camelToTitle(`Posts ${category}`)} 
         />
 
         <Grid container direction="row">
@@ -66,10 +72,12 @@ class ListPosts extends Component {
 
 ListPosts.defaultProps = {
   posts: {},
+  category: '',
 };
 
 ListPosts.propTypes = {
   posts: PropTypes.arrayOf(PropTypes.object),
+  category: PropTypes.string,
 };
 
 const mapStateToProps = ({ posts }) => ({
