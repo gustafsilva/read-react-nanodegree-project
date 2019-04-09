@@ -6,36 +6,55 @@ import { handleVotePost } from 'store/actions/posts';
 import Thumbnail from 'components/presentational/Thumbnail';
 import HeaderPostThumbnail from 'components/presentational/HeaderPostThumbnail';
 import ActionsPostThumbnail from 'components/presentational/ActionsPostThumbnail';
+import DialogRemovePostThumbnail from 'components/presentational/DialogRemovePostThumbnail';
 
 class PostThumbnail extends Component {
+  state = {
+    openDialogRemove: false,
+  }
+
   handleVote = (option) => {
     const { dispatch, post } = this.props;
 
     dispatch(handleVotePost(post, option));
   }
 
+  handleOpenDialogRemove = () => {
+    this.setState({ openDialogRemove: true });
+  }
+
+  handleCloseDialogRemove = () => {
+    this.setState({ openDialogRemove: false });
+  }
+
+  handleRemovePost = () => {
+    const { post } = this.props;
+    this.handleCloseDialogRemove();
+    console.log('excluindo post com id: ', post.id);
+  };
 
   render() {
+    const { openDialogRemove } = this.state;
     const { post } = this.props;
-    const {
-      title,
-      author,
-      body,
-      commentCount,
-      voteScore,
-    } = post;
 
     return (
       <Thumbnail>
         <HeaderPostThumbnail
-          title={title}
-          author={author}
-          body={body}
+          title={post.title}
+          author={post.author}
+          body={post.body}
+          handleOpenDialogRemove={this.handleOpenDialogRemove}
         />
         <ActionsPostThumbnail
-          commentCount={commentCount}
-          voteScore={voteScore}
+          commentCount={post.commentCount}
+          voteScore={post.voteScore}
           handleVote={this.handleVote}
+        />
+        <DialogRemovePostThumbnail
+          open={openDialogRemove}
+          titlePost={post.title}
+          handleCloseDialogRemove={this.handleCloseDialogRemove}
+          handleRemovePost={this.handleRemovePost}
         />
       </Thumbnail>
     );

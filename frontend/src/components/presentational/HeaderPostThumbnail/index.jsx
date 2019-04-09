@@ -7,7 +7,8 @@ import {
   IconButton,
   Typography,
 } from '@material-ui/core';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import DeleteIcon from '@material-ui/icons/DeleteForever';
+import EditIcon from '@material-ui/icons/Edit';
 
 const styles = {
   body: {
@@ -21,14 +22,22 @@ const HeaderPostThumbnail = (props) => {
     title,
     author,
     body,
+    handleOpenDialogRemove,
   } = props;
+
+  const buttons = (
+    <Fragment>
+      <IconButton><EditIcon /></IconButton>
+      <IconButton onClick={() => { handleOpenDialogRemove(); }}><DeleteIcon /></IconButton>
+    </Fragment>
+  );
 
   return (
     <Fragment>
       <CardHeader
         title={title}
         subheader={`@${author}`}
-        action={<IconButton><MoreVertIcon /></IconButton>}
+        action={buttons}
       />
       <CardContent>
         <Typography component="p" className={classes.body}>
@@ -44,6 +53,7 @@ HeaderPostThumbnail.propTypes = {
   title: PropTypes.string.isRequired,
   author: PropTypes.string.isRequired,
   body: PropTypes.string.isRequired,
+  handleOpenDialogRemove: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(HeaderPostThumbnail);

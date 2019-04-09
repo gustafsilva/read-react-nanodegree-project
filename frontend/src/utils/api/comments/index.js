@@ -7,14 +7,14 @@ import {
   returnError,
 } from '../utils';
 
-export const getCommentsFromPost = postId => (
+export const fetchCommentsFromPost = postId => (
   fetch(`${BASE_API}/posts/${postId}/comments`, headers)
     .then(convertJSON)
     .then(checkError)
     .catch(returnError)
 );
 
-export const getComment = id => (
+export const fetchComment = id => (
   fetch(`${BASE_API}/comments/${id}`, headers)
     .then(convertJSON)
     .then(checkError)

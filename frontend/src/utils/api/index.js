@@ -3,8 +3,8 @@ import {
   getPostFromCategory,
 } from './categories';
 import {
-  getCommentsFromPost,
-  getComment,
+  fetchCommentsFromPost,
+  fetchComment,
   addCommentToPost,
   voteComment,
   editComment,
@@ -24,8 +24,8 @@ export {
   ERROR_API,
   fetchCategories,
   getPostFromCategory,
-  getCommentsFromPost,
-  getComment,
+  fetchCommentsFromPost,
+  fetchComment,
   addCommentToPost,
   voteComment,
   editComment,
