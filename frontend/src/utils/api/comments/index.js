@@ -39,9 +39,7 @@ export const addCommentToPost = (body, author, parentId) => {
 };
 
 export const voteComment = (id, option) => {
-  const vote = JSON.stringify({
-    option,
-  });
+  const vote = JSON.stringify({ option });
 
   return fetch(`${BASE_API}/comments/${id}`, { ...headers, method: 'POST', body: vote })
     .then(convertJSON)

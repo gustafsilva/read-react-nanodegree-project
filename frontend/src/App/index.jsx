@@ -42,11 +42,9 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({ categories, posts }) => {
-  return {
-    loading: !(Object.keys(categories).length > 0 && Object.keys(posts).length >= 0),
-  };
-};
+const mapStateToProps = ({ categories, posts }) => ({
+  loading: !(Object.keys(categories).length > 0 && Object.keys(posts).length >= 0),
+});
 
 App.propTypes = {
   dispatch: PropTypes.func.isRequired,

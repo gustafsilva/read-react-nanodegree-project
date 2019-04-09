@@ -22,8 +22,8 @@ class ListPosts extends Component {
   render() {
     const { filter } = this.state;
     const { posts } = this.props;
-
     let postsFilted = posts.filter(post => post.deleted === false);
+
     postsFilted = filter === 'votes'
       ? postsFilted.sort((a, b) => b.voteScore - a.voteScore)
       : postsFilted.sort((a, b) => b.timestamp - a.timestamp);
@@ -53,7 +53,6 @@ ListPosts.defaultProps = {
 };
 
 ListPosts.propTypes = {
-  dispatch: PropTypes.func.isRequired,
   posts: PropTypes.arrayOf(PropTypes.object),
 };
 

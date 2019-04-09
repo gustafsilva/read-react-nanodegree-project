@@ -34,17 +34,15 @@ class Header extends Component {
     const { categories } = this.props;
 
     return (
-      <header>
-        <NavBar
-          categories={categories}
-          anchorEl={anchorEl}
-          mobileMoreAnchorEl={mobileMoreAnchorEl}
-          handleMenuOpen={this.handleMenuOpen}
-          handleMenuClose={this.handleMenuClose}
-          handleMobileMenuOpen={this.handleMobileMenuOpen}
-          handleNewPostSectionOpen={this.handleNewPostSectionOpen}
-        />
-      </header>
+      <NavBar
+        categories={categories}
+        anchorEl={anchorEl}
+        mobileMoreAnchorEl={mobileMoreAnchorEl}
+        handleMenuOpen={this.handleMenuOpen}
+        handleMenuClose={this.handleMenuClose}
+        handleMobileMenuOpen={this.handleMobileMenuOpen}
+        handleNewPostSectionOpen={this.handleNewPostSectionOpen}
+      />
     );
   }
 }
