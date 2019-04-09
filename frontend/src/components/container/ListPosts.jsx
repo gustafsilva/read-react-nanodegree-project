@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Grid } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 import camelToTitle from '@cahil/utils/transforms/camelToTitle';
 
 import NavListPosts from 'components/presentational/NavListPosts';
@@ -44,7 +44,7 @@ class ListPosts extends Component {
         <NavListPosts
           filter={filter}
           handleChangeFilter={this.handleChangeFilter}
-          title={camelToTitle(`Posts ${category}`)} 
+          title={camelToTitle(`Posts ${category}`)}
         />
 
         <Grid container direction="row">
@@ -56,6 +56,9 @@ class ListPosts extends Component {
               handleCloseDialogEdit={this.handleCloseEditPost}
             />
           ))}
+          {posts.length <= 0 && (
+            <Typography variant="overline">Nenhum post encontrado.</Typography>
+          )}
         </Grid>
 
         {editPostId !== null && (
