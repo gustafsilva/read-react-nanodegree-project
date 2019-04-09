@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { TextField } from '@material-ui/core';
 
+import { handleEditPost } from 'store/actions/posts';
 import DialogFullScreen from 'components/presentational/DialogFullScreen';
 
 class EditPost extends Component {
@@ -37,9 +38,10 @@ class EditPost extends Component {
   }
 
   handleSave = () => {
-    const { handleClose } = this.props;
-    console.log('SALVAR');
+    const { title, body } = this.state;
+    const { handleClose, dispatch, id } = this.props;
 
+    dispatch(handleEditPost(id, title, body));
     handleClose();
   }
 
@@ -82,10 +84,12 @@ class EditPost extends Component {
 }
 
 EditPost.propTypes = {
+  id: PropTypes.string.isRequired,
   initTitle: PropTypes.string.isRequired,
   initBody: PropTypes.string.isRequired,
   open: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ posts }, { id }) => {

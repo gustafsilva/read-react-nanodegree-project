@@ -5,6 +5,7 @@ import * as API from 'utils/api';
 export const GET_POSTS = 'GET_POSTS';
 export const VOTE_POST = 'VOTE_POST';
 export const REMOVE_POST = 'REMOVE_POST';
+export const EDIT_POST = 'EDIT_POST';
 
 export const getPosts = posts => ({
   type: GET_POSTS,
@@ -20,6 +21,11 @@ export const votePost = (post, option) => ({
 export const removePost = id => ({
   type: REMOVE_POST,
   id,
+});
+
+export const editPost = post => ({
+  type: EDIT_POST,
+  post,
 });
 
 export const handleVotePost = (post, option) => (dispatch) => {
@@ -40,5 +46,14 @@ export const handleRemovePost = post => (dispatch) => {
     if (response !== null) {
       dispatch(removePost(post.id));
     }
+  });
+};
+
+export const handleEditPost = (id, title, body) => (dispatch) => {
+  dispatch(showLoading());
+
+  return API.editPost(id, title, body).then((postEdited) => {
+    dispatch(editPost(postEdited));
+    dispatch(hideLoading());
   });
 };

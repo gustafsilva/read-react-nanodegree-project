@@ -3,6 +3,7 @@ import {
   GET_POSTS,
   VOTE_POST,
   REMOVE_POST,
+  EDIT_POST,
 } from 'store/actions/posts';
 
 export const INIT_STATE = [];
@@ -22,6 +23,13 @@ const posts = (state = INIT_STATE, action) => {
           };
         }
         return post;
+      });
+    case EDIT_POST:
+      return state.map((currentPost) => {
+        if (currentPost.id === action.post.id) {
+          return action.post;
+        }
+        return currentPost;
       });
     case REMOVE_POST:
       return state.filter(post => post.id !== action.id);
