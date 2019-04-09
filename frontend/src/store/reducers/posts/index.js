@@ -2,6 +2,7 @@
 import {
   GET_POSTS,
   VOTE_POST,
+  REMOVE_POST,
 } from 'store/actions/posts';
 
 export const INIT_STATE = [];
@@ -22,6 +23,8 @@ const posts = (state = INIT_STATE, action) => {
         }
         return post;
       });
+    case REMOVE_POST:
+      return state.filter(post => post.id !== action.id);
     default:
       return state;
   }

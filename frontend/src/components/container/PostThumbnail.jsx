@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { handleVotePost } from 'store/actions/posts';
+import { handleVotePost, handleRemovePost } from 'store/actions/posts';
 import Thumbnail from 'components/presentational/Thumbnail';
 import HeaderPostThumbnail from 'components/presentational/HeaderPostThumbnail';
 import ActionsPostThumbnail from 'components/presentational/ActionsPostThumbnail';
@@ -19,18 +19,15 @@ class PostThumbnail extends Component {
     dispatch(handleVotePost(post, option));
   }
 
-  handleOpenDialogRemove = () => {
-    this.setState({ openDialogRemove: true });
-  }
+  handleOpenDialogRemove = () => { this.setState({ openDialogRemove: true }); }
 
-  handleCloseDialogRemove = () => {
-    this.setState({ openDialogRemove: false });
-  }
+  handleCloseDialogRemove = () => { this.setState({ openDialogRemove: false }); }
 
-  handleRemovePost = () => {
-    const { post } = this.props;
+  handleClickRemovePost = () => {
+    const { dispatch, post } = this.props;
+
+    dispatch(handleRemovePost(post));
     this.handleCloseDialogRemove();
-    console.log('excluindo post com id: ', post.id);
   };
 
   render() {
@@ -54,7 +51,7 @@ class PostThumbnail extends Component {
           open={openDialogRemove}
           titlePost={post.title}
           handleCloseDialogRemove={this.handleCloseDialogRemove}
-          handleRemovePost={this.handleRemovePost}
+          handleRemovePost={this.handleClickRemovePost}
         />
       </Thumbnail>
     );
