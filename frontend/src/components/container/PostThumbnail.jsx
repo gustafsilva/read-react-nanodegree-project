@@ -32,7 +32,7 @@ class PostThumbnail extends Component {
 
   render() {
     const { openDialogRemove } = this.state;
-    const { post } = this.props;
+    const { post, handleOpenDialogEdit } = this.props;
 
     return (
       <Thumbnail>
@@ -41,6 +41,7 @@ class PostThumbnail extends Component {
           author={post.author}
           body={post.body}
           handleOpenDialogRemove={this.handleOpenDialogRemove}
+          handleOpenDialogEdit={() => { handleOpenDialogEdit(post.id); }}
         />
         <ActionsPostThumbnail
           commentCount={post.commentCount}
@@ -61,6 +62,7 @@ class PostThumbnail extends Component {
 PostThumbnail.propTypes = {
   post: PropTypes.objectOf(PropTypes.any).isRequired,
   dispatch: PropTypes.func.isRequired,
+  handleOpenDialogEdit: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ posts }, { id }) => ({

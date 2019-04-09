@@ -5,10 +5,12 @@ import { Grid } from '@material-ui/core';
 
 import NavListPosts from 'components/presentational/NavListPosts';
 import PostThumbnail from 'components/container/PostThumbnail';
+import EditPost from 'components/container/EditPost';
 
 class ListPosts extends Component {
   state = {
     filter: 'votes',
+    editPostId: null,
   };
 
   handleChangeFilter = (event) => {
@@ -19,8 +21,12 @@ class ListPosts extends Component {
     });
   }
 
+  handleOpenEditPost = (editPostId) => { this.setState({ editPostId }); }
+
+  handleCloseEditPost = () => { this.setState({ editPostId: null }); }
+
   render() {
-    const { filter } = this.state;
+    const { filter, editPostId, openEditPost } = this.state;
     const { posts } = this.props;
     let postsFilted = posts.filter(post => post.deleted === false);
 
@@ -40,9 +46,19 @@ class ListPosts extends Component {
             <PostThumbnail
               key={post.id}
               id={post.id}
+              handleOpenDialogEdit={this.handleOpenEditPost}
+              handleCloseDialogEdit={this.handleCloseEditPost}
             />
           ))}
         </Grid>
+
+        {editPostId !== null && (
+          <EditPost
+            id={editPostId}
+            open={openEditPost !== null}
+            handleClose={this.handleCloseEditPost}
+          />
+        )}
       </Grid>
     );
   }

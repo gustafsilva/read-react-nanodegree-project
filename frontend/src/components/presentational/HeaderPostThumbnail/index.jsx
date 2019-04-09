@@ -24,11 +24,12 @@ const HeaderPostThumbnail = (props) => {
     author,
     body,
     handleOpenDialogRemove,
+    handleOpenDialogEdit,
   } = props;
 
   const buttons = (
     <Fragment>
-      <IconButton><EditIcon /></IconButton>
+      <IconButton onClick={() => { handleOpenDialogEdit(); }}><EditIcon /></IconButton>
       <IconButton onClick={() => { handleOpenDialogRemove(); }}><DeleteIcon /></IconButton>
     </Fragment>
   );
@@ -55,6 +56,7 @@ HeaderPostThumbnail.propTypes = {
   author: PropTypes.string.isRequired,
   body: PropTypes.string.isRequired,
   handleOpenDialogRemove: PropTypes.func.isRequired,
+  handleOpenDialogEdit: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(HeaderPostThumbnail);
