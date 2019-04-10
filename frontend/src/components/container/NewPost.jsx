@@ -19,13 +19,15 @@ class NewPost extends Component {
     category: '',
   };
 
+  resetState = () => { this.setState({ title: '', body: '', category: '' }); };
+
   changeTitle = (event) => {
     const { value } = event.target;
 
     this.setState({
       title: value,
     });
-  }
+  };
 
   changeBody = (event) => {
     const { value } = event.target;
@@ -33,7 +35,7 @@ class NewPost extends Component {
     this.setState({
       body: value,
     });
-  }
+  };
 
   changeCategory = (event) => {
     const { value } = event.target;
@@ -41,7 +43,7 @@ class NewPost extends Component {
     this.setState({
       category: value,
     });
-  }
+  };
 
   handleSave = () => {
     const { title, body, category } = this.state;
@@ -53,8 +55,8 @@ class NewPost extends Component {
 
     dispatch(handleSavePost(title, body, author, category));
     handleClose();
-  }
-
+    this.resetState();
+  };
 
   render() {
     const { title, body, category } = this.state;
