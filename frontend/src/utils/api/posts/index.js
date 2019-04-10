@@ -21,19 +21,14 @@ export const getPost = id => (
     .catch(returnError)
 );
 
-export const addPost = (post) => {
-  const id = generateUID;
+export const addPost = (title, body, author, category) => {
+  const id = generateUID();
   const timestamp = Date.now();
-  const {
-    title,
-    body,
-    author,
-    category,
-  } = post;
+
   if ((typeof title !== 'string' || title.length <= 0)
     || (typeof body !== 'string' || body.length <= 0)
     || (typeof author !== 'string' || author.length <= 0)
-    || (typeof category !== 'object' || category.length <= 0)) {
+    || (typeof category !== 'string' || category.length <= 0)) {
     return new Promise((res) => {
       res(null);
     });

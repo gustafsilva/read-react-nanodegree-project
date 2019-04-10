@@ -1,13 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import NewPost from 'components/container/NewPost';
 import NavBar from 'components/presentational/NavBar';
+
 
 class Header extends Component {
   state = {
     anchorEl: null,
     mobileMoreAnchorEl: null,
+    openNewPostDialog: false,
   };
 
   handleMenuOpen = (event) => {
@@ -25,24 +28,32 @@ class Header extends Component {
 
   handleNewPostSectionOpen = () => {
     this.handleMenuClose();
-    // eslint-disable-next-line no-console
-    console.log('implentar janela de novo post');
+
+    this.setState({ openNewPostDialog: true });
   }
 
+  handleNewPostSectionClose = () => { this.setState({ openNewPostDialog: false }); }
+
   render() {
-    const { anchorEl, mobileMoreAnchorEl } = this.state;
+    const { anchorEl, mobileMoreAnchorEl, openNewPostDialog } = this.state;
     const { categories } = this.props;
 
     return (
-      <NavBar
-        categories={categories}
-        anchorEl={anchorEl}
-        mobileMoreAnchorEl={mobileMoreAnchorEl}
-        handleMenuOpen={this.handleMenuOpen}
-        handleMenuClose={this.handleMenuClose}
-        handleMobileMenuOpen={this.handleMobileMenuOpen}
-        handleNewPostSectionOpen={this.handleNewPostSectionOpen}
-      />
+      <Fragment>
+        <NavBar
+          categories={categories}
+          anchorEl={anchorEl}
+          mobileMoreAnchorEl={mobileMoreAnchorEl}
+          handleMenuOpen={this.handleMenuOpen}
+          handleMenuClose={this.handleMenuClose}
+          handleMobileMenuOpen={this.handleMobileMenuOpen}
+          handleNewPostSectionOpen={this.handleNewPostSectionOpen}
+        />
+        <NewPost
+          open={openNewPostDialog}
+          handleClose={this.handleNewPostSectionClose}
+        />
+      </Fragment>
     );
   }
 }
