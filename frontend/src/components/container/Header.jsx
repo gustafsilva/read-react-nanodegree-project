@@ -13,26 +13,22 @@ class Header extends Component {
     openNewPostDialog: false,
   };
 
-  handleMenuOpen = (event) => {
-    this.setState({ anchorEl: event.currentTarget });
-  };
+  handleMenuOpen = (event) => { this.setState({ anchorEl: event.currentTarget }); };
 
   handleMenuClose = () => {
     this.setState({ anchorEl: null });
     this.setState({ mobileMoreAnchorEl: null });
   };
 
-  handleMobileMenuOpen = (event) => {
-    this.setState({ mobileMoreAnchorEl: event.currentTarget });
-  };
+  handleMobileMenuOpen = (event) => { this.setState({ mobileMoreAnchorEl: event.currentTarget }); };
 
-  handleNewPostSectionOpen = () => {
+  handleNewPostDialogOpen = () => {
     this.handleMenuClose();
 
     this.setState({ openNewPostDialog: true });
-  }
+  };
 
-  handleNewPostSectionClose = () => { this.setState({ openNewPostDialog: false }); }
+  handleNewPostDialogClose = () => { this.setState({ openNewPostDialog: false }); };
 
   render() {
     const { anchorEl, mobileMoreAnchorEl, openNewPostDialog } = this.state;
@@ -47,11 +43,11 @@ class Header extends Component {
           handleMenuOpen={this.handleMenuOpen}
           handleMenuClose={this.handleMenuClose}
           handleMobileMenuOpen={this.handleMobileMenuOpen}
-          handleNewPostSectionOpen={this.handleNewPostSectionOpen}
+          handleNewPostDialogOpen={this.handleNewPostDialogOpen}
         />
         <NewPost
           open={openNewPostDialog}
-          handleClose={this.handleNewPostSectionClose}
+          handleClose={this.handleNewPostDialogClose}
         />
       </Fragment>
     );

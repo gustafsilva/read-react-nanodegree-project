@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import camelToTitle from '@cahil/utils/transforms/camelToTitle';
-import { TextField } from '@material-ui/core';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import FilledInput from '@material-ui/core/FilledInput';
+import {
+  TextField,
+  InputLabel,
+  FormControl,
+  Select,
+  MenuItem,
+  FilledInput,
+} from '@material-ui/core';
 
 import { handleSavePost } from 'store/actions/posts';
 import DialogFullScreen from 'components/presentational/DialogFullScreen';
@@ -46,6 +48,7 @@ class NewPost extends Component {
   };
 
   handleSave = () => {
+    // todo: criar sistema para verificação, antes de dispachar a ação para salvar o novo post
     const { title, body, category } = this.state;
     const {
       handleClose,

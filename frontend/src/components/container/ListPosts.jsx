@@ -52,11 +52,12 @@ class ListPosts extends Component {
             <PostThumbnail
               key={post.id}
               id={post.id}
+              width={350}
               handleOpenDialogEdit={this.handleOpenEditPost}
               handleCloseDialogEdit={this.handleCloseEditPost}
             />
           ))}
-          {posts.length <= 0 && (
+          {postsFilted.length <= 0 && (
             <Typography variant="overline">Nenhum post encontrado.</Typography>
           )}
         </Grid>

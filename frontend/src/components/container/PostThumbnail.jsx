@@ -19,7 +19,7 @@ class PostThumbnail extends Component {
     dispatch(handleVotePost(post, option));
   }
 
-  handleOpenDialogRemove = () => { this.setState({ openDialogRemove: true }); }
+  handleOpenDialogRemove = () => { this.setState({ openDialogRemove: true }); };
 
   handleCloseDialogRemove = () => { this.setState({ openDialogRemove: false }); }
 
@@ -32,10 +32,14 @@ class PostThumbnail extends Component {
 
   render() {
     const { openDialogRemove } = this.state;
-    const { post, handleOpenDialogEdit } = this.props;
+    const { post, width, handleOpenDialogEdit } = this.props;
+
+    if (post === null) {
+      return false;
+    }
 
     return (
-      <Thumbnail>
+      <Thumbnail width={width}>
         <HeaderPostThumbnail
           title={post.title}
           author={post.author}
@@ -59,10 +63,16 @@ class PostThumbnail extends Component {
   }
 }
 
+PostThumbnail.defaultProps = {
+  post: null,
+  width: null,
+};
+
 PostThumbnail.propTypes = {
-  post: PropTypes.objectOf(PropTypes.any).isRequired,
+  post: PropTypes.objectOf(PropTypes.any),
   dispatch: PropTypes.func.isRequired,
   handleOpenDialogEdit: PropTypes.func.isRequired,
+  width: PropTypes.number,
 };
 
 const mapStateToProps = ({ posts }, { id }) => ({

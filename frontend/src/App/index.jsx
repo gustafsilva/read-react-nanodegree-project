@@ -43,7 +43,7 @@ class App extends Component {
 }
 
 const mapStateToProps = ({ categories, posts }) => ({
-  loading: !(Object.keys(categories).length > 0 && Object.keys(posts).length >= 0),
+  loading: !(categories.length > 0 && posts.length >= 0),
 });
 
 App.propTypes = {

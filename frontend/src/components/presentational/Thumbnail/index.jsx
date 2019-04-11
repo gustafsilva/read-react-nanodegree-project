@@ -7,7 +7,6 @@ import {
 
 const styles = {
   card: {
-    maxWidth: 350,
     marginTop: 20,
     marginLeft: 10,
   },
@@ -17,18 +16,28 @@ const Thumbnail = (props) => {
   const {
     classes,
     children,
+    lengthMd,
+    width,
   } = props;
-
   return (
-    <Card className={classes.card} md={3} xs={12}>
-      {children}
-    </Card>
+    <div style={width !== null ? { width } : {}}>
+      <Card className={classes.card} md={lengthMd} xs={12}>
+        {children}
+      </Card>
+    </div>
   );
+};
+
+Thumbnail.defaultProps = {
+  lengthMd: 3,
+  width: null,
 };
 
 Thumbnail.propTypes = {
   classes: PropTypes.objectOf(PropTypes.string).isRequired,
   children: PropTypes.node.isRequired,
+  lengthMd: PropTypes.number,
+  width: PropTypes.number,
 };
 
 export default withStyles(styles)(Thumbnail);

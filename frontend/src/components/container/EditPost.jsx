@@ -50,6 +50,10 @@ class EditPost extends Component {
     const { title, body } = this.state;
     const { open, handleClose } = this.props;
 
+    if (title === undefined || body === undefined) {
+      return false;
+    }
+
     return (
       <DialogFullScreen
         title="Edit Post"

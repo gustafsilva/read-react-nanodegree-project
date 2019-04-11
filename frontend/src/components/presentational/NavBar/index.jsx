@@ -73,7 +73,7 @@ const NavBar = (props) => {
     handleMenuOpen,
     handleMenuClose,
     handleMobileMenuOpen,
-    handleNewPostSectionOpen,
+    handleNewPostDialogOpen,
   } = props;
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -100,7 +100,7 @@ const NavBar = (props) => {
             >
               <MenuIcon />
             </IconButton>
-            <IconButton onClick={handleNewPostSectionOpen} color="inherit">
+            <IconButton onClick={handleNewPostDialogOpen} color="inherit">
               <AddIcon />
             </IconButton>
           </div>
@@ -122,11 +122,11 @@ const NavBar = (props) => {
         isMobileMenuOpen={isMobileMenuOpen}
         handleMenuOpen={handleMenuOpen}
         handleMenuClose={handleMenuClose}
-        handleNewPostSectionOpen={handleNewPostSectionOpen}
+        handleNewPostSectionOpen={handleNewPostDialogOpen}
       />
     </div>
   );
-}
+};
 
 NavBar.defaultProps = {
   anchorEl: null,
@@ -141,7 +141,7 @@ NavBar.propTypes = {
   handleMenuOpen: PropTypes.func.isRequired,
   handleMenuClose: PropTypes.func.isRequired,
   handleMobileMenuOpen: PropTypes.func.isRequired,
-  handleNewPostSectionOpen: PropTypes.func.isRequired,
+  handleNewPostDialogOpen: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(NavBar);

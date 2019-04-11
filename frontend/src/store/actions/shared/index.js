@@ -18,8 +18,8 @@ const handleInitData = () => (dispatch) => {
     if (categories === null || posts === null) {
       dispatch(handleInitData());
     } else {
-      dispatch(getCategories(categories));
       dispatch(getPosts(posts));
+      dispatch(getCategories(categories));
 
       dispatch(hideLoading());
     }
