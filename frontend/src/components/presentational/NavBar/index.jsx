@@ -7,12 +7,10 @@ import {
   Typography,
   withStyles,
 } from '@material-ui/core';
-import {
-  MoreVert,
-} from '@material-ui/icons';
 import HomeIcon from '@material-ui/icons/Home';
 import MenuIcon from '@material-ui/icons/Menu';
 import AddIcon from '@material-ui/icons/Add';
+import MoreVert from '@material-ui/icons/MoreVert';
 
 import Link from 'components/hocs/Link';
 import MenuCategories from './MenuCategories';
@@ -68,15 +66,15 @@ const NavBar = (props) => {
   const {
     classes,
     categories,
-    anchorEl,
-    mobileMoreAnchorEl,
+    menuCategoriesAnchorEl,
+    menuMobileAnchorEl,
     handleMenuOpen,
     handleMenuClose,
     handleMobileMenuOpen,
     handleNewPostDialogOpen,
   } = props;
-  const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const isMenuOpen = Boolean(menuCategoriesAnchorEl);
+  const isMobileMenuOpen = Boolean(menuMobileAnchorEl);
 
   return (
     <div className={classes.root}>
@@ -113,34 +111,43 @@ const NavBar = (props) => {
       </AppBar>
       <MenuCategories
         categories={categories}
-        anchorEl={anchorEl}
+        anchorEl={menuCategoriesAnchorEl}
         isMenuOpen={isMenuOpen}
         handleMenuClose={handleMenuClose}
       />
       <MenuMobile
-        mobileMoreAnchorEl={mobileMoreAnchorEl}
+        mobileMoreAnchorEl={menuMobileAnchorEl}
         isMobileMenuOpen={isMobileMenuOpen}
         handleMenuOpen={handleMenuOpen}
         handleMenuClose={handleMenuClose}
-        handleNewPostSectionOpen={handleNewPostDialogOpen}
+        handleOpenDialogNewPost={handleNewPostDialogOpen}
       />
     </div>
   );
 };
 
 NavBar.defaultProps = {
-  anchorEl: null,
-  mobileMoreAnchorEl: null,
+  menuCategoriesAnchorEl: null,
+  menuMobileAnchorEl: null,
 };
 
+// todo: ajustar nomes de props que tem funções.
 NavBar.propTypes = {
+  /** Styles the components you ure to render. (material-ui). */
   classes: PropTypes.objectOf(PropTypes.string).isRequired,
+  /** All available post categories. */
   categories: PropTypes.arrayOf(PropTypes.object).isRequired,
-  anchorEl: PropTypes.objectOf(PropTypes.object),
-  mobileMoreAnchorEl: PropTypes.objectOf(PropTypes.object),
+  /** Element representing category menu. */
+  menuCategoriesAnchorEl: PropTypes.objectOf(PropTypes.any),
+  /** Element representing category mobile */
+  menuMobileAnchorEl: PropTypes.objectOf(PropTypes.any),
+  /** Function responsible for opening menu on desktop devices. */
   handleMenuOpen: PropTypes.func.isRequired,
+  /** Function responsible for closing menu on desktop devices. */
   handleMenuClose: PropTypes.func.isRequired,
+  /** Function responsible for opening menu on mobile devices. */
   handleMobileMenuOpen: PropTypes.func.isRequired,
+  /** Function responsible for closing menu on mobile devices. */
   handleNewPostDialogOpen: PropTypes.func.isRequired,
 };
 

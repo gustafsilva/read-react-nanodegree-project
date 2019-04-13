@@ -1,29 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from '@material-ui/core';
 
-import Transition from 'components/hocs/Transition';
+import Transition from '../../hocs/Transition';
 
 const DialogRemovePostThumbnail = (props) => {
   const {
-    open,
+    isOpen,
     titlePost,
-    handleCloseDialogRemove,
+    handleClose,
     handleRemovePost,
   } = props;
 
   return (
     <Dialog
-      open={open}
+      open={isOpen}
       TransitionComponent={Transition}
       keepMounted
-      onClose={handleCloseDialogRemove}
+      onClose={handleClose}
       aria-labelledby="alert-dialog-slide-title"
       aria-describedby="alert-dialog-slide-description"
     >
@@ -36,7 +38,7 @@ const DialogRemovePostThumbnail = (props) => {
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleCloseDialogRemove} color="primary">
+        <Button onClick={handleClose} color="primary">
           Cancel
         </Button>
         <Button onClick={handleRemovePost} color="secondary">
@@ -48,13 +50,17 @@ const DialogRemovePostThumbnail = (props) => {
 };
 
 DialogRemovePostThumbnail.defaultProps = {
-  open: false,
+  isOpen: false,
 };
 
 DialogRemovePostThumbnail.propTypes = {
-  open: PropTypes.bool,
+  /** Flag that indicates whether dialog is open. */
+  isOpen: PropTypes.bool,
+  /** Current title of the post to be deleted. */
   titlePost: PropTypes.string.isRequired,
-  handleCloseDialogRemove: PropTypes.func.isRequired,
+  /** Function responsible for closing dialog. */
+  handleClose: PropTypes.func.isRequired,
+  /** Function responsible for deleting a post. */
   handleRemovePost: PropTypes.func.isRequired,
 };
 

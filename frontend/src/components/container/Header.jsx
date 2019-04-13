@@ -2,51 +2,55 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import NewPost from 'components/container/NewPost';
-import NavBar from 'components/presentational/NavBar';
-
+import NewPost from './NewPost';
+import NavBar from '../presentational/NavBar';
 
 class Header extends Component {
   state = {
-    anchorEl: null,
-    mobileMoreAnchorEl: null,
-    openNewPostDialog: false,
+    /** Element representing category menu. */
+    menuCategoriesAnchorEl: null,
+    /** Element representing category mobile */
+    menuMobileAnchorEl: null,
+    /** Flag that indicates whether dialog for new post is open. */
+    isOpenDialogNewPost: false,
   };
 
-  handleMenuOpen = (event) => { this.setState({ anchorEl: event.currentTarget }); };
-
-  handleMenuClose = () => {
-    this.setState({ anchorEl: null });
-    this.setState({ mobileMoreAnchorEl: null });
+  handleMenuCategoriesOpen = (event) => {
+    this.setState({ menuCategoriesAnchorEl: event.currentTarget });
   };
 
-  handleMobileMenuOpen = (event) => { this.setState({ mobileMoreAnchorEl: event.currentTarget }); };
+  handleMenuCategoriesClose = () => {
+    this.setState({ menuCategoriesAnchorEl: null });
+    this.setState({ menuMobileAnchorEl: null });
+  };
+
+  handleMenuMobileOpen = (event) => { this.setState({ menuMobileAnchorEl: event.currentTarget }); };
 
   handleNewPostDialogOpen = () => {
-    this.handleMenuClose();
+    this.handleMenuCategoriesClose();
 
-    this.setState({ openNewPostDialog: true });
+    this.setState({ isOpenDialogNewPost: true });
   };
 
-  handleNewPostDialogClose = () => { this.setState({ openNewPostDialog: false }); };
+  handleNewPostDialogClose = () => { this.setState({ isOpenDialogNewPost: false }); };
 
   render() {
-    const { anchorEl, mobileMoreAnchorEl, openNewPostDialog } = this.state;
+    const { menuCategoriesAnchorEl, menuMobileAnchorEl, isOpenDialogNewPost } = this.state;
     const { categories } = this.props;
 
     return (
       <Fragment>
         <NavBar
           categories={categories}
-          anchorEl={anchorEl}
-          mobileMoreAnchorEl={mobileMoreAnchorEl}
-          handleMenuOpen={this.handleMenuOpen}
-          handleMenuClose={this.handleMenuClose}
-          handleMobileMenuOpen={this.handleMobileMenuOpen}
+          menuCategoriesAnchorEl={menuCategoriesAnchorEl}
+          menuMobileAnchorEl={menuMobileAnchorEl}
+          handleMenuOpen={this.handleMenuCategoriesOpen}
+          handleMenuClose={this.handleMenuCategoriesClose}
+          handleMobileMenuOpen={this.handleMenuMobileOpen}
           handleNewPostDialogOpen={this.handleNewPostDialogOpen}
         />
         <NewPost
-          open={openNewPostDialog}
+          open={isOpenDialogNewPost}
           handleClose={this.handleNewPostDialogClose}
         />
       </Fragment>
@@ -55,6 +59,7 @@ class Header extends Component {
 }
 
 Header.propTypes = {
+  /** All categories available. */
   categories: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 

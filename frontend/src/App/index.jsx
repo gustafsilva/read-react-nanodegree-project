@@ -4,25 +4,25 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import LoadingBar from 'react-redux-loading-bar';
 
-import LoadingApp from 'components/presentational/LoadingApp';
-import Content from 'components/presentational/Content';
-import Header from 'components/container/Header';
-import HomePage from 'pages/HomePage';
-import PostsByCategoryPage from 'pages/PostsByCategoryPage';
-import PostDetailPage from 'pages/PostDetailPage';
+import LoadingApp from '../components/presentational/LoadingApp';
+import Content from '../components/presentational/Content';
+import Header from '../components/container/Header';
+import HomePage from '../pages/HomePage';
+import PostsByCategoryPage from '../pages/PostsByCategoryPage';
+import PostDetailPage from '../pages/PostDetailPage';
 
-import handleInitData from 'store/actions/shared';
+import handleInitData from '../store/actions/shared';
 
 class App extends Component {
   componentDidMount = () => {
     const { dispatch } = this.props;
     dispatch(handleInitData());
-  }
+  };
 
   render() {
-    const { loading } = this.props;
+    const { isLoading } = this.props;
 
-    if (loading === true) {
+    if (isLoading === true) {
       return <LoadingApp />;
     }
 
@@ -43,12 +43,15 @@ class App extends Component {
 }
 
 const mapStateToProps = ({ categories, posts }) => ({
-  loading: !(categories.length > 0 && posts.length >= 0),
+  // todo: ajustar erro se categoria for carregado e post não.
+  isLoading: !(categories.length > 0 && posts.length >= 0),
 });
 
 App.propTypes = {
+  /** Function responsible for dispatch of shared (redux). */
   dispatch: PropTypes.func.isRequired,
-  loading: PropTypes.bool.isRequired,
+  /** Flag that indicates whether the app is loading. */
+  isLoading: PropTypes.bool.isRequired,
 };
 
 export default connect(mapStateToProps)(App);

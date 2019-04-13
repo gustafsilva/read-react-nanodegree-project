@@ -65,9 +65,13 @@ const ActionsPostThumbnail = (props) => {
 };
 
 ActionsPostThumbnail.propTypes = {
+  /** Styles the components you ure to render. (material-ui). */
   classes: PropTypes.objectOf(PropTypes.string).isRequired,
+  /** Number of comments from the current post. */
   commentCount: PropTypes.number.isRequired,
+  /** Number of votes currently in the post. */
   voteScore: PropTypes.number.isRequired,
+  /** Function responsible for voting in the post. */
   handleVote: PropTypes.func.isRequired,
 };
 

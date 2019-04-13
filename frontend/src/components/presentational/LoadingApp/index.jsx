@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid } from '@material-ui/core';
 import LoadingSpin from 'react-loading-spin';
 
-const LoadingApp = () => (
+const Index = () => (
   <Grid
     container
     spacing={0}
@@ -15,4 +15,4 @@ const LoadingApp = () => (
   </Grid>
 );
 
-export default LoadingApp;
+export default Index;

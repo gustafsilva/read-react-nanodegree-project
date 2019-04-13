@@ -14,7 +14,7 @@ const MenuMobile = (props) => {
     isMobileMenuOpen,
     handleMenuClose,
     handleMenuOpen,
-    handleNewPostSectionOpen,
+    handleOpenDialogNewPost,
   } = props;
 
   return (
@@ -39,7 +39,7 @@ const MenuMobile = (props) => {
         </IconButton>
         <p>Categories</p>
       </MenuItem>
-      <MenuItem onClick={handleNewPostSectionOpen}>
+      <MenuItem onClick={handleOpenDialogNewPost}>
         <IconButton color="inherit">
           <AddIcon />
         </IconButton>
@@ -54,11 +54,16 @@ MenuMobile.defaultProps = {
 };
 
 MenuMobile.propTypes = {
+  /** Component where menu will be rendered. */
   mobileMoreAnchorEl: PropTypes.objectOf(PropTypes.object),
+  /** Flag indicating whether menu mobile is open. */
   isMobileMenuOpen: PropTypes.bool.isRequired,
+  /** Function responsible for opening menu. */
   handleMenuOpen: PropTypes.func.isRequired,
+  /** Function responsible for closing menu. */
   handleMenuClose: PropTypes.func.isRequired,
-  handleNewPostSectionOpen: PropTypes.func.isRequired,
+  /** Function responsible for opening dialog for new post. */
+  handleOpenDialogNewPost: PropTypes.func.isRequired,
 };
 
 export default MenuMobile;

@@ -58,9 +58,13 @@ NavListPost.defaultProps = {
 };
 
 NavListPost.propTypes = {
+  /** Styles the components you ure to render. (material-ui). */
   classes: PropTypes.objectOf(PropTypes.string).isRequired,
+  /** Navigation bar title. */
   title: PropTypes.string,
+  /** Current filter for posts. */
   filter: PropTypes.string.isRequired,
+  /** Function responsible for changing the filter of posts. */
   handleChangeFilter: PropTypes.func.isRequired,
 };
 

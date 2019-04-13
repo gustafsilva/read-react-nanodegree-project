@@ -9,6 +9,7 @@ Link.defaultProps = {
 };
 
 Link.propTypes = {
+  /** Link child color. */
   color: PropTypes.string,
 };
 

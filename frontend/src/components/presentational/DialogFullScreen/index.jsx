@@ -1,16 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
+import {
+  withStyles,
+  Button,
+  Dialog,
+  AppBar,
+  Toolbar,
+  IconButton,
+  Typography,
+} from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 
-import Transition from 'components/hocs/Transition';
+import Transition from '../../hocs/Transition';
 
 const styles = {
   appBar: {
@@ -24,17 +26,18 @@ const styles = {
 const DialogFullScreen = (props) => {
   const {
     classes,
-    open,
+    isOpen,
     title,
     handleClose,
-    handleSave,
+    handleDone,
     children,
+    endButtonTitle,
   } = props;
 
   return (
     <Dialog
       fullScreen
-      open={open}
+      open={isOpen}
       onClose={handleClose}
       TransitionComponent={Transition}
     >
@@ -46,8 +49,8 @@ const DialogFullScreen = (props) => {
           <Typography variant="h6" color="inherit" className={classes.flex}>
             {title}
           </Typography>
-          <Button color="inherit" onClick={handleSave}>
-            Save
+          <Button color="inherit" onClick={handleDone}>
+            {endButtonTitle}
           </Button>
         </Toolbar>
       </AppBar>
@@ -57,16 +60,25 @@ const DialogFullScreen = (props) => {
 };
 
 DialogFullScreen.defaultProps = {
-  open: false,
+  isOpen: false,
+  endButtonTitle: 'Save',
 };
 
 DialogFullScreen.propTypes = {
+  /** Styles the components you ure to render. (material-ui). */
   classes: PropTypes.objectOf(PropTypes.string).isRequired,
-  open: PropTypes.bool,
-  handleClose: PropTypes.func.isRequired,
-  handleSave: PropTypes.func.isRequired,
+  /** Full title of the dialog box. */
   title: PropTypes.string.isRequired,
+  /** Flag that indicates whether dialog is open. */
+  isOpen: PropTypes.bool, // todo: mudar nome da flag.
+  /** Component that will be rendered in the dialog body. */
   children: PropTypes.node.isRequired,
+  /** Title of button responsible for finalizing the dialog. */
+  endButtonTitle: PropTypes.string,
+  /** Function responsible for closing dialog. */
+  handleClose: PropTypes.func.isRequired,
+  /** Function responsible for finalizing dialog. */
+  handleDone: PropTypes.func.isRequired, // todo: mudar nome da função.
 };
 
 export default withStyles(styles)(DialogFullScreen);

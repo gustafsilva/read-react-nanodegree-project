@@ -17,7 +17,7 @@ const posts = (state = INIT_STATE, action) => {
       const vote = action.option === 'upVote' ? 1 : -1;
 
       return state.map((post) => {
-        if (post.id === action.post.id) {
+        if (post.id === action.id) {
           return {
             ...post,
             voteScore: post.voteScore + vote,

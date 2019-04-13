@@ -10,7 +10,7 @@ export const ADD_POST = 'ADD_POST';
 
 export const getPosts = posts => ({ type: GET_POSTS, posts });
 
-export const votePost = (post, option) => ({ type: VOTE_POST, post, option });
+export const votePost = (id, option) => ({ type: VOTE_POST, id, option });
 
 export const removePost = id => ({ type: REMOVE_POST, id });
 
@@ -18,23 +18,23 @@ export const editPost = post => ({ type: EDIT_POST, post });
 
 export const addPost = post => ({ type: ADD_POST, post });
 
-export const handleVotePost = (post, option) => (dispatch) => {
-  dispatch(votePost(post, option));
+export const handleVotePost = (idPost, option) => (dispatch) => {
+  dispatch(votePost(idPost, option));
   dispatch(showLoading());
 
-  return API.votePost(post.id, option).then((response) => {
+  return API.votePost(idPost, option).then(() => {
     dispatch(hideLoading());
   });
 };
 
-export const handleRemovePost = post => (dispatch) => {
+export const handleRemovePost = idPost => (dispatch) => {
   dispatch(showLoading());
 
-  return API.deletePost(post.id).then((response) => {
+  return API.deletePost(idPost).then((response) => {
     dispatch(hideLoading());
 
     if (response !== null) {
-      dispatch(removePost(post.id));
+      dispatch(removePost(idPost));
     }
   });
 };

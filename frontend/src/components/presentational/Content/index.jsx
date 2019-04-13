@@ -18,11 +18,13 @@ const Content = ({ classes, children }) => (
 );
 
 Content.defaultProps = {
-  children: null,
+  children: false,
 };
 
 Content.propTypes = {
+  /** Styles the components you ure to render. (material-ui). */
   classes: PropTypes.objectOf(PropTypes.string).isRequired,
+  /** Content to render. */
   children: PropTypes.node,
 };
 

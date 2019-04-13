@@ -23,14 +23,14 @@ const HeaderPostThumbnail = (props) => {
     title,
     author,
     body,
-    handleOpenDialogRemove,
-    handleOpenDialogEdit,
+    openDialogToRemovePost,
+    openDialogToEditPost,
   } = props;
 
   const buttons = (
     <Fragment>
-      <IconButton onClick={() => { handleOpenDialogEdit(); }}><EditIcon /></IconButton>
-      <IconButton onClick={() => { handleOpenDialogRemove(); }}><DeleteIcon /></IconButton>
+      <IconButton onClick={() => { openDialogToEditPost(); }}><EditIcon /></IconButton>
+      <IconButton onClick={() => { openDialogToRemovePost(); }}><DeleteIcon /></IconButton>
     </Fragment>
   );
 
@@ -51,12 +51,18 @@ const HeaderPostThumbnail = (props) => {
 };
 
 HeaderPostThumbnail.propTypes = {
+  /** Styles the components you ure to render. (material-ui). */
   classes: PropTypes.objectOf(PropTypes.string).isRequired,
+  /** Title of the post. */
   title: PropTypes.string.isRequired,
+  /** Author of the post. */
   author: PropTypes.string.isRequired,
+  /** Body of the post. */
   body: PropTypes.string.isRequired,
-  handleOpenDialogRemove: PropTypes.func.isRequired,
-  handleOpenDialogEdit: PropTypes.func.isRequired,
+  /** Function responsible for opening dialog box to remove post. */
+  openDialogToRemovePost: PropTypes.func.isRequired,
+  /** Function responsible for opening dialog box to edit post. */
+  openDialogToEditPost: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(HeaderPostThumbnail);

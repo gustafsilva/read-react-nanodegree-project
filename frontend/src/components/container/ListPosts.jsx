@@ -2,53 +2,43 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Grid, Typography } from '@material-ui/core';
-import camelToTitle from '@cahil/utils/transforms/camelToTitle';
+import { camelToTitle } from '@cahil/utils';
 
-import NavListPosts from 'components/presentational/NavListPosts';
-import PostThumbnail from 'components/container/PostThumbnail';
-import EditPost from 'components/container/EditPost';
+import NavListPosts from '../presentational/NavListPosts';
+import PostThumbnail from './PostThumbnail';
+import { filterPosts } from '../../utils';
+import EditPostDialog from './EditPostDialog';
 
 class ListPosts extends Component {
   state = {
-    filter: 'votes',
+    /** Flag that indicates which filter will be applied to the list of posts. */
+    filterBy: 'votes',
+    /** ID of the post to be edited. */
     editPostId: null,
   };
 
-  handleChangeFilter = (event) => {
-    const filter = event.target.value;
+  handleChangeFilterBy = (event) => { this.setState({ filterBy: event.target.value }); };
 
-    this.setState({
-      filter,
-    });
-  }
+  handleOpenEditPost = (editPostId) => { this.setState({ editPostId }); };
 
-  handleOpenEditPost = (editPostId) => { this.setState({ editPostId }); }
-
-  handleCloseEditPost = () => { this.setState({ editPostId: null }); }
+  handleCloseEditPost = () => { this.setState({ editPostId: null }); };
 
   render() {
-    const { filter, editPostId, openEditPost } = this.state;
-    const { posts, category } = this.props;
-    let postsFilted = posts.filter(post => post.deleted === false);
+    const { filterBy, editPostId, openEditPost } = this.state;
+    const { posts, categoryFilter } = this.props;
 
-    if (category !== '') {
-      postsFilted = postsFilted.filter(post => post.category === category);
-    }
-
-    postsFilted = filter === 'votes'
-      ? postsFilted.sort((a, b) => b.voteScore - a.voteScore)
-      : postsFilted.sort((a, b) => b.timestamp - a.timestamp);
+    const filteredPosts = filterPosts(posts, categoryFilter, filterBy);
 
     return (
       <Grid container>
         <NavListPosts
-          filter={filter}
-          handleChangeFilter={this.handleChangeFilter}
-          title={camelToTitle(`Posts ${category}`)}
+          filter={filterBy}
+          handleChangeFilter={this.handleChangeFilterBy}
+          title={camelToTitle(`Posts ${categoryFilter}`)}
         />
 
         <Grid container direction="row">
-          {postsFilted.map(post => (
+          {filteredPosts.map(post => (
             <PostThumbnail
               key={post.id}
               id={post.id}
@@ -57,16 +47,16 @@ class ListPosts extends Component {
               handleCloseDialogEdit={this.handleCloseEditPost}
             />
           ))}
-          {postsFilted.length <= 0 && (
-            <Typography variant="overline">Nenhum post encontrado.</Typography>
+          {filteredPosts.length <= 0 && (
+            <Typography variant="overline">No posts found.</Typography>
           )}
         </Grid>
 
         {editPostId !== null && (
-          <EditPost
+          <EditPostDialog
             id={editPostId}
-            open={openEditPost !== null}
-            handleClose={this.handleCloseEditPost}
+            isOpenDialog={openEditPost !== null}
+            handleCloseDialog={this.handleCloseEditPost}
           />
         )}
       </Grid>
@@ -76,12 +66,14 @@ class ListPosts extends Component {
 
 ListPosts.defaultProps = {
   posts: {},
-  category: '',
+  categoryFilter: '',
 };
 
 ListPosts.propTypes = {
+  /** All posts available. */
   posts: PropTypes.arrayOf(PropTypes.object),
-  category: PropTypes.string,
+  /** Category specific to filter the posts. */
+  categoryFilter: PropTypes.string,
 };
 
 const mapStateToProps = ({ posts }) => ({

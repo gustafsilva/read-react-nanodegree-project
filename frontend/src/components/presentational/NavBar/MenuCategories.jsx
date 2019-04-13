@@ -1,12 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Menu, MenuItem } from '@material-ui/core';
-import camelToTitle from '@cahil/utils/transforms/camelToTitle';
+import { camelToTitle } from '@cahil/utils';
 
-import Link from 'components/hocs/Link';
+import Link from '../../hocs/Link';
 
-const MenuCategories = ({ categories, anchorEl, isMenuOpen, handleMenuClose }) => (
-  anchorEl !== null && (
+const MenuCategories = (props) => {
+  const {
+    categories,
+    anchorEl,
+    isMenuOpen,
+    handleMenuClose,
+  } = props;
+
+  if (anchorEl === null) {
+    return false;
+  }
+
+  return (
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
@@ -23,17 +34,21 @@ const MenuCategories = ({ categories, anchorEl, isMenuOpen, handleMenuClose }) =
         </Link>
       ))}
     </Menu>
-  )
-);
+  );
+};
 
 MenuCategories.defaultProps = {
   anchorEl: null,
 };
 
 MenuCategories.propTypes = {
+  /** Categories with their names and URL addresses. */
   categories: PropTypes.arrayOf(PropTypes.object),
+  /** Component where menu will appear. */
   anchorEl: PropTypes.objectOf(PropTypes.object),
+  /** Flag indicating whether menu is open. */
   isMenuOpen: PropTypes.bool.isRequired,
+  /** Function responsible for closing menu. */
   handleMenuClose: PropTypes.func.isRequired,
 };
 

@@ -2,60 +2,66 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { handleVotePost, handleRemovePost } from 'store/actions/posts';
-import Thumbnail from 'components/presentational/Thumbnail';
-import HeaderPostThumbnail from 'components/presentational/HeaderPostThumbnail';
-import ActionsPostThumbnail from 'components/presentational/ActionsPostThumbnail';
-import DialogRemovePostThumbnail from 'components/presentational/DialogRemovePostThumbnail';
+import { handleVotePost, handleRemovePost } from '../../store/actions/posts';
+import Thumbnail from '../presentational/Thumbnail';
+import HeaderPostThumbnail from '../presentational/HeaderPostThumbnail';
+import ActionsPostThumbnail from '../presentational/ActionsPostThumbnail';
+import DialogRemovePostThumbnail from '../presentational/DialogRemovePostThumbnail';
 
 class PostThumbnail extends Component {
   state = {
-    openDialogRemove: false,
-  }
+    /** Flag that indicates whether dialog to remove the post is open. */
+    dialogIsOpenToRemoveThePost: false,
+  };
 
   handleVote = (option) => {
-    const { dispatch, post } = this.props;
+    const { dispatch, id } = this.props;
 
-    dispatch(handleVotePost(post, option));
-  }
+    dispatch(handleVotePost(id, option));
+  };
 
-  handleOpenDialogRemove = () => { this.setState({ openDialogRemove: true }); };
+  handleOpenDialogRemove = () => { this.setState({ dialogIsOpenToRemoveThePost: true }); };
 
-  handleCloseDialogRemove = () => { this.setState({ openDialogRemove: false }); }
+  handleCloseDialogRemove = () => { this.setState({ dialogIsOpenToRemoveThePost: false }); }
 
   handleClickRemovePost = () => {
-    const { dispatch, post } = this.props;
+    const { dispatch, id } = this.props;
 
-    dispatch(handleRemovePost(post));
+    dispatch(handleRemovePost(id));
     this.handleCloseDialogRemove();
   };
 
   render() {
-    const { openDialogRemove } = this.state;
-    const { post, width, handleOpenDialogEdit } = this.props;
-
-    if (post === null) {
-      return false;
-    }
+    const { dialogIsOpenToRemoveThePost } = this.state;
+    const {
+      id,
+      title,
+      author,
+      body,
+      commentCount,
+      voteScore,
+      width,
+      handleOpenDialogEdit,
+    } = this.props;
 
     return (
       <Thumbnail width={width}>
         <HeaderPostThumbnail
-          title={post.title}
-          author={post.author}
-          body={post.body}
-          handleOpenDialogRemove={this.handleOpenDialogRemove}
-          handleOpenDialogEdit={() => { handleOpenDialogEdit(post.id); }}
+          title={title}
+          author={author}
+          body={body}
+          openDialogToRemovePost={this.handleOpenDialogRemove}
+          openDialogToEditPost={() => { handleOpenDialogEdit(id); }}
         />
         <ActionsPostThumbnail
-          commentCount={post.commentCount}
-          voteScore={post.voteScore}
+          commentCount={commentCount}
+          voteScore={voteScore}
           handleVote={this.handleVote}
         />
         <DialogRemovePostThumbnail
-          open={openDialogRemove}
-          titlePost={post.title}
-          handleCloseDialogRemove={this.handleCloseDialogRemove}
+          isOpen={dialogIsOpenToRemoveThePost}
+          titlePost={title}
+          handleClose={this.handleCloseDialogRemove}
           handleRemovePost={this.handleClickRemovePost}
         />
       </Thumbnail>
@@ -64,19 +70,34 @@ class PostThumbnail extends Component {
 }
 
 PostThumbnail.defaultProps = {
-  post: null,
   width: null,
 };
 
 PostThumbnail.propTypes = {
-  post: PropTypes.objectOf(PropTypes.any),
+  /** ID linked to post. */
+  id: PropTypes.string.isRequired,
+  /** Current post title. */
+  title: PropTypes.string.isRequired,
+  /** Current post body. */
+  body: PropTypes.string.isRequired,
+  /** Current post author. */
+  author: PropTypes.string.isRequired,
+  /** Number of current comments. */
+  commentCount: PropTypes.number.isRequired,
+  /** Number of current votes. */
+  voteScore: PropTypes.number.isRequired,
+  /** Function responsible for dispatching action for redux. */
   dispatch: PropTypes.func.isRequired,
+  /** Function responsible for opening dialog for editing the post. */
   handleOpenDialogEdit: PropTypes.func.isRequired,
+  /** Horizontal thumbnail size. */
   width: PropTypes.number,
 };
 
-const mapStateToProps = ({ posts }, { id }) => ({
-  post: posts.find(post => post.id === id),
-});
+const mapStateToProps = ({ posts }, { id }) => {
+  const post = posts.find(currentPost => currentPost.id === id);
+
+  return { ...post };
+};
 
 export default connect(mapStateToProps)(PostThumbnail);
