@@ -2,8 +2,8 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import NewPost from './NewPost';
-import NavBar from '../presentational/NavBar';
+import NewPostDialog from '../NewPostDialog';
+import NavBar from '../../presentational/NavBar';
 
 class Header extends Component {
   state = {
@@ -49,7 +49,7 @@ class Header extends Component {
           handleMobileMenuOpen={this.handleMenuMobileOpen}
           handleNewPostDialogOpen={this.handleNewPostDialogOpen}
         />
-        <NewPost
+        <NewPostDialog
           open={isOpenDialogNewPost}
           handleClose={this.handleNewPostDialogClose}
         />

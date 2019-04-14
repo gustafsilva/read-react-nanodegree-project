@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { handleVotePost, handleRemovePost } from '../../store/actions/posts';
-import Thumbnail from '../presentational/Thumbnail';
-import HeaderPostThumbnail from '../presentational/HeaderPostThumbnail';
-import ActionsPostThumbnail from '../presentational/ActionsPostThumbnail';
-import DialogRemovePostThumbnail from '../presentational/DialogRemovePostThumbnail';
+import { handleVotePost, handleRemovePost } from '../../../store/actions/posts';
+import Thumbnail from '../../presentational/Thumbnail';
+import HeaderPostThumbnail from '../../presentational/HeaderPostThumbnail';
+import ActionsPostThumbnail from '../../presentational/ActionsPostThumbnail';
+import DialogRemovePostThumbnail from '../../presentational/DialogRemovePostThumbnail';
 
 class PostThumbnail extends Component {
   state = {

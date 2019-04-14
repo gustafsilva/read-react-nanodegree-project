@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 import { Grid, Typography } from '@material-ui/core';
 import { camelToTitle } from '@cahil/utils';
 
-import NavListPosts from '../presentational/NavListPosts';
-import PostThumbnail from './PostThumbnail';
-import { filterPosts } from '../../utils';
-import EditPostDialog from './EditPostDialog';
+import NavListPosts from '../../presentational/NavListPosts';
+import PostThumbnail from '../PostThumbnail';
+import { filterPosts } from '../../../utils';
+import EditPostDialog from '../EditPostDialog';
 
 class ListPosts extends Component {
   state = {

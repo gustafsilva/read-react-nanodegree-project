@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { TextField } from '@material-ui/core';
 
-import { handleEditPost } from '../../store/actions/posts';
-import DialogFullScreen from '../presentational/DialogFullScreen';
+import { handleEditPost } from '../../../store/actions/posts';
+import DialogFullScreen from '../../presentational/DialogFullScreen';
 
 class EditPostDialog extends Component {
   state = {

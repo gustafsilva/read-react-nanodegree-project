@@ -11,10 +11,10 @@ import {
   FilledInput,
 } from '@material-ui/core';
 
-import { handleSavePost } from '../../store/actions/posts';
-import DialogFullScreen from '../presentational/DialogFullScreen';
+import { handleSavePost } from '../../../store/actions/posts';
+import DialogFullScreen from '../../presentational/DialogFullScreen';
 
-class NewPost extends Component {
+class NewPostDialog extends Component {
   state = {
     title: '',
     body: '',
@@ -97,7 +97,7 @@ class NewPost extends Component {
   }
 }
 
-NewPost.propTypes = {
+NewPostDialog.propTypes = {
   /** All categories for available posts. */
   categories: PropTypes.arrayOf(PropTypes.object).isRequired,
   /** User that is adding new post. */
@@ -115,4 +115,4 @@ const mapStateToProps = ({ categories, user }) => ({
   author: user,
 });
 
-export default connect(mapStateToProps)(NewPost);
+export default connect(mapStateToProps)(NewPostDialog);
