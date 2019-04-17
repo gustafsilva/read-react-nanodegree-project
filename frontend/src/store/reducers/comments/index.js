@@ -1,5 +1,9 @@
 /* eslint-disable no-case-declarations */
-import { GET_COMMENTS, VOTE_COMMENT } from '../../actions/comments';
+import {
+  GET_COMMENTS,
+  VOTE_COMMENT,
+  ADD_COMMENT,
+} from '../../actions/comments';
 
 
 export const INIT_STATE = [];
@@ -20,6 +24,8 @@ const comments = (state = INIT_STATE, action) => {
         }
         return comment;
       });
+    case ADD_COMMENT:
+      return state.concat([action.comment]);
     default:
       return state;
   }
