@@ -8,7 +8,6 @@ import HeaderPostThumbnail from '../../presentational/HeaderPostThumbnail';
 import ActionsPostThumbnail from '../../presentational/ActionsPostThumbnail';
 import DialogRemovePostThumbnail from '../../presentational/DialogRemovePostThumbnail';
 import Link from '../../hocs/Link';
-import { Typography } from '@material-ui/core';
 
 class PostThumbnail extends Component {
   state = {

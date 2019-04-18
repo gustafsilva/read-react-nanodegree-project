@@ -25,7 +25,17 @@ class ListPosts extends Component {
 
   render() {
     const { filterBy, editPostId, openEditPost } = this.state;
-    const { posts, categoryFilter, postLinked } = this.props;
+    const {
+      posts,
+      categoryFilter,
+      postLinked,
+      categories,
+    } = this.props;
+
+    const categorySearched = categories.filter(category => category.name === categoryFilter);
+    if (categoryFilter !== '' && categorySearched.length <= 0) {
+      return <Typography variant="overline">Category not found.</Typography>;
+    }
 
     const filteredPosts = filterPosts(posts, categoryFilter, filterBy);
 
@@ -77,10 +87,12 @@ ListPosts.propTypes = {
   /** Category specific to filter the posts. */
   categoryFilter: PropTypes.string,
   postLinked: PropTypes.bool,
+  categories: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-const mapStateToProps = ({ posts }) => ({
+const mapStateToProps = ({ posts, categories }) => ({
   posts,
+  categories,
 });
 
 export default connect(mapStateToProps)(ListPosts);
