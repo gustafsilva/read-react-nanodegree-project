@@ -46,22 +46,3 @@ export const handleVoteComment = (commentId, option) => (dispatch) => {
     }
   });
 };
-
-export const handleAddComment = (body, postId) => (dispatch, getState) => {
-  const { user } = getState();
-  dispatch(showLoading());
-
-  return API.addCommentToPost(body, user, postId).then((comment) => {
-    dispatch(hideLoading());
-
-    if (comment === null) {
-      const notificationErrorOption = createNotificationError('Comment not added, try again!');
-      dispatch(error(notificationErrorOption));
-    } else {
-      dispatch(addComment(comment));
-
-      const notificationSuccessOption = createNotificationSuccess(`Comment '${comment.body}' was succesfullyy added`);
-      dispatch(success(notificationSuccessOption));
-    }
-  });
-};

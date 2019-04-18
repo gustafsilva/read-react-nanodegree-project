@@ -4,7 +4,12 @@ import { withRouter } from 'react-router-dom';
 
 import ListPosts from '../components/container/ListPosts';
 
-const PostsByCategoryPage = ({ match }) => <ListPosts categoryFilter={match.params.category} />;
+const PostsByCategoryPage = ({ match }) => (
+  <ListPosts
+    categoryFilter={match.params.category}
+    postLinked
+  />
+);
 
 PostsByCategoryPage.propTypes = {
   /** Used to capture route GET arguments (URL). */

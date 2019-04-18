@@ -5,7 +5,7 @@ import { TextField } from '@material-ui/core';
 import { error } from 'react-notification-system-redux';
 
 import DialogFullScreen from '../../presentational/DialogFullScreen';
-import { handleAddComment } from '../../../store/actions/comments';
+import { handleAddComment } from '../../../store/actions/shared';
 import { createNotificationError } from '../../../utils/notifications';
 
 class NewCommentDialog extends Component {

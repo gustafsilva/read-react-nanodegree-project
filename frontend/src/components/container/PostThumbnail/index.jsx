@@ -7,6 +7,8 @@ import Thumbnail from '../../presentational/Thumbnail';
 import HeaderPostThumbnail from '../../presentational/HeaderPostThumbnail';
 import ActionsPostThumbnail from '../../presentational/ActionsPostThumbnail';
 import DialogRemovePostThumbnail from '../../presentational/DialogRemovePostThumbnail';
+import Link from '../../hocs/Link';
+import { Typography } from '@material-ui/core';
 
 class PostThumbnail extends Component {
   state = {
@@ -42,7 +44,11 @@ class PostThumbnail extends Component {
       voteScore,
       width,
       handleOpenDialogEdit,
+      category,
+      postLinked,
     } = this.props;
+
+    const linkPostDetail = postLinked !== false && (<Link to={`/${category}/${id}`} color="info">More details...</Link>);
 
     return (
       <Thumbnail width={width}>
@@ -52,6 +58,7 @@ class PostThumbnail extends Component {
           body={body}
           openDialogToRemovePost={this.handleOpenDialogRemove}
           openDialogToEditPost={() => { handleOpenDialogEdit(id); }}
+          linkPostDetail={linkPostDetail}
         />
         <ActionsPostThumbnail
           commentCount={commentCount}
@@ -71,6 +78,7 @@ class PostThumbnail extends Component {
 
 PostThumbnail.defaultProps = {
   width: null,
+  postLinked: false,
 };
 
 PostThumbnail.propTypes = {
@@ -92,6 +100,8 @@ PostThumbnail.propTypes = {
   handleOpenDialogEdit: PropTypes.func.isRequired,
   /** Horizontal thumbnail size. */
   width: PropTypes.number,
+  category: PropTypes.string.isRequired,
+  postLinked: PropTypes.bool,
 };
 
 const mapStateToProps = ({ posts }, { id }) => {
