@@ -1,6 +1,8 @@
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
+import { success, error } from 'react-notification-system-redux';
 
 import * as API from '../../../utils/api';
+import { createNotificationSuccess, createNotificationError } from '../../../utils/notifications';
 
 export const GET_COMMENTS = 'GET_COMMENTS';
 export const VOTE_COMMENT = 'VOTE_COMMENT';
@@ -18,17 +20,30 @@ export const handleFetchComments = postId => (dispatch) => {
   return API.fetchCommentsFromPost(postId).then((response) => {
     dispatch(hideLoading());
 
-    dispatch(getComments(response));
+    if (response === null) {
+      const notificationErrorOption = createNotificationError('Comments not loaded, check your internet connection or reload the page.');
+      dispatch(error(notificationErrorOption));
+    } else {
+      dispatch(getComments(response));
+    }
   });
 };
 
 export const handleVoteComment = (commentId, option) => (dispatch) => {
   dispatch(showLoading());
 
-  return API.voteComment(commentId, option).then(() => {
+  return API.voteComment(commentId, option).then((response) => {
     dispatch(hideLoading());
 
-    dispatch(voteComment(commentId, option));
+    if (response === null) {
+      const notificationErrorOption = createNotificationError('Vote not computed, check your internet connection or try again!');
+      dispatch(error(notificationErrorOption));
+    } else {
+      dispatch(voteComment(commentId, option));
+
+      const notificationSuccessOption = createNotificationSuccess('Vote computed successfully');
+      dispatch(success(notificationSuccessOption));
+    }
   });
 };
 
@@ -37,8 +52,16 @@ export const handleAddComment = (body, postId) => (dispatch, getState) => {
   dispatch(showLoading());
 
   return API.addCommentToPost(body, user, postId).then((comment) => {
-    dispatch(addComment(comment));
-
     dispatch(hideLoading());
+
+    if (comment === null) {
+      const notificationErrorOption = createNotificationError('Comment not added, try again!');
+      dispatch(error(notificationErrorOption));
+    } else {
+      dispatch(addComment(comment));
+
+      const notificationSuccessOption = createNotificationSuccess(`Comment '${comment.body}' was succesfullyy added`);
+      dispatch(success(notificationSuccessOption));
+    }
   });
 };

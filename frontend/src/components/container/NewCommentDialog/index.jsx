@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { TextField } from '@material-ui/core';
+import { error } from 'react-notification-system-redux';
 
 import DialogFullScreen from '../../presentational/DialogFullScreen';
 import { handleAddComment } from '../../../store/actions/comments';
+import { createNotificationError } from '../../../utils/notifications';
 
 class NewCommentDialog extends Component {
   state = {
@@ -22,7 +24,8 @@ class NewCommentDialog extends Component {
       handleClose();
       this.resetState();
     } else {
-      alert('O campo não deve ser vázio');
+      const notificationOptions = createNotificationError('The body field was empty.');
+      dispatch(error(notificationOptions));
     }
   };
 
@@ -51,6 +54,7 @@ class NewCommentDialog extends Component {
             margin="normal"
             variant="filled"
             fullWidth
+            required
           />
         </form>
       </DialogFullScreen>
@@ -62,6 +66,7 @@ NewCommentDialog.propTypes = {
   postId: PropTypes.string.isRequired,
   open: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 export default connect()(NewCommentDialog);

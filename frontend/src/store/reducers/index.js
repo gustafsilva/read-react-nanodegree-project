@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { loadingBarReducer } from 'react-redux-loading-bar';
+import { reducer as notifications } from 'react-notification-system-redux';
 
 
 import categories from './categories';
@@ -12,6 +13,7 @@ const reducers = combineReducers({
   posts,
   comments,
   user,
+  notifications,
   loadingBar: loadingBarReducer,
 });
 
