@@ -6,25 +6,33 @@ import { camelToTitle } from '@cahil/utils';
 
 import NavListPosts from '../../presentational/NavListPosts';
 import PostThumbnail from '../PostThumbnail';
-import { filterPosts } from '../../../utils';
+import filterPosts from '../../../utils';
 import EditPostDialog from '../EditPostDialog';
 
 class ListPosts extends Component {
   state = {
     /** Flag that indicates which filter will be applied to the list of posts. */
     filterBy: 'votes',
+    filterOrd: 'asc',
     /** ID of the post to be edited. */
     editPostId: null,
   };
 
   handleChangeFilterBy = (event) => { this.setState({ filterBy: event.target.value }); };
 
+  handleChangeFilterOrd = (event) => { this.setState({ filterOrd: event.target.value }); };
+
   handleOpenEditPost = (editPostId) => { this.setState({ editPostId }); };
 
   handleCloseEditPost = () => { this.setState({ editPostId: null }); };
 
   render() {
-    const { filterBy, editPostId, openEditPost } = this.state;
+    const {
+      filterBy,
+      filterOrd,
+      editPostId,
+      openEditPost,
+    } = this.state;
     const {
       posts,
       categoryFilter,
@@ -37,7 +45,7 @@ class ListPosts extends Component {
       return <Typography variant="overline">Category not found.</Typography>;
     }
 
-    const filteredPosts = filterPosts(posts, categoryFilter, filterBy);
+    const filteredPosts = filterPosts(posts, categoryFilter, filterBy, filterOrd);
 
     return (
       <Grid container>
@@ -45,6 +53,8 @@ class ListPosts extends Component {
           filter={filterBy}
           handleChangeFilter={this.handleChangeFilterBy}
           title={camelToTitle(`Posts ${categoryFilter}`)}
+          filterOrd={filterOrd}
+          handleChangeFilterOrd={this.handleChangeFilterOrd}
         />
 
         <Grid container direction="row">
