@@ -25,7 +25,7 @@ class ListPosts extends Component {
 
   render() {
     const { filterBy, editPostId, openEditPost } = this.state;
-    const { posts, categoryFilter } = this.props;
+    const { posts, categoryFilter, postLinked } = this.props;
 
     const filteredPosts = filterPosts(posts, categoryFilter, filterBy);
 
@@ -45,6 +45,7 @@ class ListPosts extends Component {
               width={350}
               handleOpenDialogEdit={this.handleOpenEditPost}
               handleCloseDialogEdit={this.handleCloseEditPost}
+              postLinked={postLinked}
             />
           ))}
           {filteredPosts.length <= 0 && (
@@ -67,6 +68,7 @@ class ListPosts extends Component {
 ListPosts.defaultProps = {
   posts: {},
   categoryFilter: '',
+  postLinked: false,
 };
 
 ListPosts.propTypes = {
@@ -74,6 +76,7 @@ ListPosts.propTypes = {
   posts: PropTypes.arrayOf(PropTypes.object),
   /** Category specific to filter the posts. */
   categoryFilter: PropTypes.string,
+  postLinked: PropTypes.bool,
 };
 
 const mapStateToProps = ({ posts }) => ({

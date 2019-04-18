@@ -23,6 +23,7 @@ const HeaderPostThumbnail = (props) => {
     title,
     author,
     body,
+    linkPostDetail,
     openDialogToRemovePost,
     openDialogToEditPost,
   } = props;
@@ -44,6 +45,7 @@ const HeaderPostThumbnail = (props) => {
       <CardContent>
         <Typography component="p" className={classes.body}>
           {body}
+          {linkPostDetail}
         </Typography>
       </CardContent>
     </Fragment>
@@ -63,6 +65,7 @@ HeaderPostThumbnail.propTypes = {
   openDialogToRemovePost: PropTypes.func.isRequired,
   /** Function responsible for opening dialog box to edit post. */
   openDialogToEditPost: PropTypes.func.isRequired,
+  linkPostDetail: PropTypes.node.isRequired,
 };
 
 export default withStyles(styles)(HeaderPostThumbnail);

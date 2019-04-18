@@ -5,7 +5,8 @@ import {
   REMOVE_POST,
   EDIT_POST,
   ADD_POST,
-} from 'store/actions/posts';
+  INC_COMMENT_POST,
+} from '../../actions/posts';
 
 export const INIT_STATE = [];
 
@@ -36,6 +37,16 @@ const posts = (state = INIT_STATE, action) => {
       return state.concat([action.post]);
     case REMOVE_POST:
       return state.filter(post => post.id !== action.id);
+    case INC_COMMENT_POST:
+      return state.map((post) => {
+        if (post.id === action.postId) {
+          return {
+            ...post,
+            commentCount: post.commentCount + 1,
+          };
+        }
+        return post;
+      });
     default:
       return state;
   }
