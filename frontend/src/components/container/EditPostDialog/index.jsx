@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { TextField } from '@material-ui/core';
+import { error, info } from 'react-notification-system-redux';
 
 import { handleEditPost } from '../../../store/actions/posts';
 import DialogFullScreen from '../../presentational/DialogFullScreen';
+import { createNotificationError } from '../../../utils/notifications';
 
 class EditPostDialog extends Component {
   state = {
@@ -40,11 +42,14 @@ class EditPostDialog extends Component {
       if (title !== titleStoredInDatabase || body !== bodyStoredInDatabase) {
         // If there is any change in the fields.
         dispatch(handleEditPost(id, title, body));
+      } else {
+        const notificationInfoOption = { title: 'No data changed.' };
+        dispatch(info(notificationInfoOption));
       }
       handleCloseDialog();
     } else {
-      // If any field is blank.
-      // todo: implementar notificação de erro, pois nenhum dos campos pode ser vázio.
+      const notificationErrorOption = createNotificationError('All fields are mandatory');
+      dispatch(error(notificationErrorOption));
     }
   };
 

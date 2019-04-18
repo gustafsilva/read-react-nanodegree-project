@@ -10,9 +10,11 @@ import {
   MenuItem,
   FilledInput,
 } from '@material-ui/core';
+import { error } from 'react-notification-system-redux';
 
 import { handleSavePost } from '../../../store/actions/posts';
 import DialogFullScreen from '../../presentational/DialogFullScreen';
+import { createNotificationError } from '../../../utils/notifications';
 
 class NewPostDialog extends Component {
   state = {
@@ -34,10 +36,9 @@ class NewPostDialog extends Component {
     const { handleClose, dispatch, author } = this.props;
 
     if (title === '' || body === '' || category === '') {
-      // Caso algum campo for vázio.
-      // todo: implementar notificação de erro.
+      const notificationErrorOption = createNotificationError('No field should be empty.');
+      dispatch(error(notificationErrorOption));
     } else {
-      // Caso nenhum campo for vázio.
       dispatch(handleSavePost(title, body, author, category));
       handleClose();
       this.resetState();
@@ -63,6 +64,7 @@ class NewPostDialog extends Component {
             margin="normal"
             variant="filled"
             fullWidth
+            required
           />
 
           <TextField
@@ -73,6 +75,7 @@ class NewPostDialog extends Component {
             margin="normal"
             variant="filled"
             fullWidth
+            required
           />
 
           <FormControl fullWidth margin="normal">
@@ -83,6 +86,7 @@ class NewPostDialog extends Component {
               input={<FilledInput name="category" />}
               variant="filled"
               label="Category"
+              required
             >
               {categories.map(categoryOption => (
                 <MenuItem key={categoryOption.path} value={categoryOption.path}>

@@ -15,13 +15,13 @@ const handleInitData = () => (dispatch) => {
     .then(([categories, posts]) => ({ categories, posts }));
 
   return response.then(({ categories, posts }) => {
+    dispatch(hideLoading());
+
     if (categories === null || posts === null) {
       dispatch(handleInitData());
     } else {
       dispatch(getPosts(posts));
       dispatch(getCategories(categories));
-
-      dispatch(hideLoading());
     }
   });
 };
