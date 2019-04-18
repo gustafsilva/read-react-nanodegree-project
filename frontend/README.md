@@ -1,16 +1,16 @@
-# My Create React App :rocket:
+# Frontend - Readable React :book:
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Getting Started :+1:
 First we'll clone the project:
 ```shell
-$ git clone https://github.com/gustafsilva/my-create-react-app.git
+$ git clone https://github.com/gustafsilva/read-react-nanodegree-project.git
 ```
 
 Open the project and install node dependencies:
 ```shell
-$ cd my-create-react-app/
+$ cd read-react-nanodegree-project/
 $ npm install
 ```
 
@@ -30,6 +30,7 @@ You will also see any lint errors in the console.
 
 Launches the test runner in the interactive watch mode.<br>
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**When running the tests, I started the backend server first. Soon after performing the tests the server needs to be restarted.**
 
 ### `npm run build`
 
@@ -56,11 +57,17 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 Performs an analysis of all code in mass `./src` with a linter.
 Standard used in the project is **Airbnb**, more information [click here](https://github.com/airbnb/javascript).
 
-### `npm run docz`
+## Main Used Techologies :rocket:
 
-Performs a server with the documentation generated from the `.mdx` documents of the project.
-
-To document the components was used Docz librarian, more information [click here](https://www.docz.site/).
+- [React](http://reactjs.org)
+- [react-router](https://reacttraining.com/react-router)
+- [material-ui](https://material-ui.com/)
+- [Redux](https://redux.js.org/)
+- [redux-thunk](https://github.com/reduxjs/redux-thunk)
+- [ESlint](https://eslint.org/)
+- [Jest](https://jestjs.io/)
+- [react-notification-system-redux](https://github.com/gor181/react-notification-system-redux)
+- [react-redux-loading-bar](https://github.com/mironov/react-redux-loading-bar)
 
 ## License
 
