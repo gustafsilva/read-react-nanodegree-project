@@ -1,18 +1,6 @@
 # Frontend - Readable React :book:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Getting Started :+1:
-First we'll clone the project:
-```shell
-$ git clone https://github.com/gustafsilva/read-react-nanodegree-project.git
-```
-
-Open the project and install node dependencies:
-```shell
-$ cd read-react-nanodegree-project/
-$ npm install
-```
+Second front-end design of Udacity's Nanodegree React course.
 
 ## Available Scripts :fire:
 
@@ -30,7 +18,10 @@ You will also see any lint errors in the console.
 
 Launches the test runner in the interactive watch mode.<br>
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-**When running the tests, I started the backend server first. Soon after performing the tests the server needs to be restarted.**
+
+When running the tests, started the backend server first. Soon after performing the tests the server needs to be **restarted**.
+
+**The tests only cover access to the API.**
 
 ### `npm run build`
 
@@ -56,19 +47,3 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 Performs an analysis of all code in mass `./src` with a linter.
 Standard used in the project is **Airbnb**, more information [click here](https://github.com/airbnb/javascript).
-
-## Main Used Techologies :rocket:
-
-- [React](http://reactjs.org)
-- [react-router](https://reacttraining.com/react-router)
-- [material-ui](https://material-ui.com/)
-- [Redux](https://redux.js.org/)
-- [redux-thunk](https://github.com/reduxjs/redux-thunk)
-- [ESlint](https://eslint.org/)
-- [Jest](https://jestjs.io/)
-- [react-notification-system-redux](https://github.com/gor181/react-notification-system-redux)
-- [react-redux-loading-bar](https://github.com/mironov/react-redux-loading-bar)
-
-## License
-
-The contents of this repository are covered under the [MIT License](./LICENSE).
