@@ -20,7 +20,7 @@ const PostDetailPage = ({ match, posts }) => {
       <ListComments postId={match.params.post_id} comments={[]} />
     </div>
   );
-}
+};
 
 PostDetailPage.propTypes = {
   /** Used to capture route GET arguments (URL). */

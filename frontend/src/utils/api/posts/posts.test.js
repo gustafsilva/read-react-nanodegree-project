@@ -46,11 +46,7 @@ describe('[api] posts', () => {
     };
 
     const testCondition = (response) => {
-      expect(response).toHaveProperty('voteScore');
-      expect(response).toHaveProperty('deleted');
-      expect(response).toHaveProperty('commentCount');
-
-      expect(response.deleted).toBeFalsy();
+      expect(response).toBeNull();
     };
 
     return addPost(POST).then(testCondition);
