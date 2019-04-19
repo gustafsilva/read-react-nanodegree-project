@@ -76,6 +76,7 @@ class EditPostDialog extends Component {
             margin="normal"
             variant="filled"
             fullWidth
+            required
           />
 
           <TextField
@@ -85,6 +86,7 @@ class EditPostDialog extends Component {
             margin="normal"
             variant="filled"
             fullWidth
+            required
           />
         </form>
       </DialogFullScreen>

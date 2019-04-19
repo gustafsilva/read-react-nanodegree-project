@@ -44,6 +44,10 @@ class ListComments extends Component {
           />
         ))}
 
+        {comments.length <= 0 && (
+          <Typography variant="overline">Post without comments.</Typography>
+        )}
+
         <NewCommentDialog
           postId={postId}
           open={isOpenNewCommentDialog}

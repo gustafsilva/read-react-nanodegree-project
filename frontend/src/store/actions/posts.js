@@ -77,10 +77,11 @@ export const handleEditPost = (id, title, body) => (dispatch) => {
   });
 };
 
-export const handleSavePost = (title, body, author, category) => (dispatch) => {
+export const handleSavePost = (title, body, category) => (dispatch, getState) => {
   dispatch(showLoading());
+  const { user } = getState();
 
-  return API.addPost(title, body, author, category).then((response) => {
+  return API.addPost(title, body, user, category).then((response) => {
     dispatch(hideLoading());
 
     if (response === null) {

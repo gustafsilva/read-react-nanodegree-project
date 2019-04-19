@@ -33,13 +33,13 @@ class NewPostDialog extends Component {
 
   handleSave = () => {
     const { title, body, category } = this.state;
-    const { handleClose, dispatch, author } = this.props;
+    const { handleClose, dispatch } = this.props;
 
     if (title === '' || body === '' || category === '') {
       const notificationErrorOption = createNotificationError('No field should be empty.');
       dispatch(error(notificationErrorOption));
     } else {
-      dispatch(handleSavePost(title, body, author, category));
+      dispatch(handleSavePost(title, body, category));
       handleClose();
       this.resetState();
     }
@@ -104,8 +104,6 @@ class NewPostDialog extends Component {
 NewPostDialog.propTypes = {
   /** All categories for available posts. */
   categories: PropTypes.arrayOf(PropTypes.object).isRequired,
-  /** User that is adding new post. */
-  author: PropTypes.string.isRequired,
   /** Flag that indicates whether the post edit dialog screen is open. */
   open: PropTypes.bool.isRequired,
   /** Function responsible for closing post editing dialog. */
