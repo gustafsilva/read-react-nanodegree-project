@@ -6,11 +6,16 @@ import AddCommentIcon from '@material-ui/icons/AddComment';
 
 import CommentThumbnail from './CommentThumbnail';
 import NewCommentDialog from './NewCommentDialog';
+import DialogRemoveComment from '../presentational/DialogRemoveComment';
+import EditCommentDialog from './EditCommentDialog';
 import { handleFetchComments } from '../../store/actions/comments';
+import { handleRemoveComment } from '../../store/actions/shared';
 
 class ListComments extends Component {
   state = {
     isOpenNewCommentDialog: false,
+    commentEdit: null,
+    commentRemove: null,
   };
 
   componentDidMount() {
@@ -22,8 +27,24 @@ class ListComments extends Component {
 
   handleNewCommentDialogClose = () => { this.setState({ isOpenNewCommentDialog: false }); };
 
+  handleEditCommentDialogOpen = (commentId) => { this.setState({ commentEdit: commentId }); };
+
+  handleEditCommentDialogClose = () => { this.setState({ commentEdit: null }); };
+
+  handleRemoveCommentDialogOpen = (commentId) => { this.setState({ commentRemove: commentId }); };
+
+  handleRemoveCommentDialogClose = () => { this.setState({ commentRemove: null }); };
+
+  removeComment = () => {
+    const { dispatch } = this.props;
+    const { commentRemove } = this.state;
+    dispatch(handleRemoveComment(commentRemove));
+
+    this.handleRemoveCommentDialogClose();
+  };
+
   render() {
-    const { isOpenNewCommentDialog } = this.state;
+    const { isOpenNewCommentDialog, commentRemove, commentEdit } = this.state;
     const { comments, postId } = this.props;
 
     return (
@@ -41,6 +62,8 @@ class ListComments extends Component {
           <CommentThumbnail
             key={comment.id}
             id={comment.id}
+            handleEditCommentDialogOpen={this.handleEditCommentDialogOpen}
+            handleRemoveCommentDialogOpen={this.handleRemoveCommentDialogOpen}
           />
         ))}
 
@@ -53,6 +76,20 @@ class ListComments extends Component {
           open={isOpenNewCommentDialog}
           handleClose={this.handleNewCommentDialogClose}
         />
+
+        <DialogRemoveComment
+          isOpen={commentRemove !== null}
+          handleClose={this.handleRemoveCommentDialogClose}
+          handleRemoveComment={this.removeComment}
+        />
+
+        {commentEdit !== null && (
+          <EditCommentDialog
+            id={commentEdit}
+            isOpenDialog={commentEdit !== null}
+            handleCloseDialog={this.handleEditCommentDialogClose}
+          />
+        )}
       </div>
     );
   }

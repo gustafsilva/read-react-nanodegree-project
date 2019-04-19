@@ -3,6 +3,8 @@ import {
   GET_COMMENTS,
   VOTE_COMMENT,
   ADD_COMMENT,
+  REMOVE_COMMENT,
+  EDIT_COMMENT,
 } from '../actions/comments';
 
 
@@ -26,6 +28,18 @@ const comments = (state = INIT_STATE, action) => {
       });
     case ADD_COMMENT:
       return state.concat([action.comment]);
+    case REMOVE_COMMENT:
+      return state.filter(comment => comment.id !== action.id);
+    case EDIT_COMMENT:
+      return state.map((comment) => {
+        if (comment.id === action.id) {
+          return {
+            ...comment,
+            body: action.body,
+          };
+        }
+        return comment;
+      });
     default:
       return state;
   }

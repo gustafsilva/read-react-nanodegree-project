@@ -3,9 +3,9 @@ import { success, error } from 'react-notification-system-redux';
 
 import * as API from '../../utils/api';
 import { getCategories } from './categories';
-import { getPosts, incCommentPost } from './posts';
+import { getPosts, incCommentPost, decCommentPost } from './posts';
 import { setUser } from './user';
-import { addComment } from './comments';
+import { addComment, removeComment } from './comments';
 import { createNotificationError, createNotificationSuccess } from '../../utils/notifications';
 
 const USER_ID = 'gustavofsilva';
@@ -44,6 +44,25 @@ export const handleAddComment = (body, postId) => (dispatch, getState) => {
       dispatch(incCommentPost(postId));
 
       const notificationSuccessOption = createNotificationSuccess(`Comment '${comment.body}' was succesfullyy added`);
+      dispatch(success(notificationSuccessOption));
+    }
+  });
+};
+
+export const handleRemoveComment = commentId => (dispatch) => {
+  dispatch(showLoading());
+
+  return API.deleteComment(commentId).then((response) => {
+    dispatch(hideLoading());
+
+    if (response === null) {
+      const notificationErrorOption = createNotificationError('Error deleting comment, please try again!');
+      dispatch(error(notificationErrorOption));
+    } else {
+      dispatch(removeComment(commentId));
+      dispatch(decCommentPost(response.parentId));
+
+      const notificationSuccessOption = createNotificationSuccess('Comment deleted successfully!');
       dispatch(success(notificationSuccessOption));
     }
   });

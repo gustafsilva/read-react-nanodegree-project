@@ -6,6 +6,7 @@ import {
   EDIT_POST,
   ADD_POST,
   INC_COMMENT_POST,
+  DEC_COMMENT_POST,
 } from '../actions/posts';
 
 export const INIT_STATE = [];
@@ -43,6 +44,16 @@ const posts = (state = INIT_STATE, action) => {
           return {
             ...post,
             commentCount: post.commentCount + 1,
+          };
+        }
+        return post;
+      });
+    case DEC_COMMENT_POST:
+      return state.map((post) => {
+        if (post.id === action.postId) {
+          return {
+            ...post,
+            commentCount: post.commentCount - 1,
           };
         }
         return post;

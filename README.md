@@ -24,17 +24,18 @@ $ npm start
 
 Ready! Now open your browser at [localhost:3000](https://localhost:3000/) the application will already be running :stars:
 
-- More information about the backend, [click here](./backend/api-server/README.md).
-- More information about the frontend, [click here](./frontend/README.md).
+- More information about the *backend* provided by Udacity, [click here](./backend/README.md).
+- More information about the *frontend*, [click here](./frontend/README.md).
+- More information about *Api's ENDPOINTS*, [click here](./backend/api-server/README.md).
 
 ## Main Used Techologies :rocket:
 
 - [React](http://reactjs.org)
-- [react-router](https://reacttraining.com/react-router)
-- [material-ui](https://material-ui.com/)
 - [Redux](https://redux.js.org/)
 - [redux-thunk](https://github.com/reduxjs/redux-thunk)
-- [ESlint](https://eslint.org/)
+- [material-ui](https://material-ui.com/)
+- [react-router](https://reacttraining.com/react-router)
 - [Jest](https://jestjs.io/)
+- [ESlint](https://eslint.org/)
 - [react-notification-system-redux](https://github.com/gor181/react-notification-system-redux)
 - [react-redux-loading-bar](https://github.com/mironov/react-redux-loading-bar)

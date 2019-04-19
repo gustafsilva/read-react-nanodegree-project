@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import {
+  CardActions,
+  IconButton,
+  Grid,
+} from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/DeleteForever';
+import EditIcon from '@material-ui/icons/Edit';
 
 import Thumbnail from '../presentational/Thumbnail';
 import ContentCommentThumbnail from '../presentational/ContentCommentThumbail';
@@ -15,9 +22,12 @@ class CommentThumbnail extends Component {
 
   render() {
     const {
+      id,
       author,
       body,
       voteScore,
+      handleEditCommentDialogOpen,
+      handleRemoveCommentDialogOpen,
     } = this.props;
 
 
@@ -30,6 +40,23 @@ class CommentThumbnail extends Component {
           handleVoteUp={() => { this.handleVote('upVote'); }}
           handleVoteDown={() => { this.handleVote('downVote'); }}
         />
+
+        <CardActions disableActionSpacing>
+          <Grid container direction="row-reverse" justify="flex-start">
+            <IconButton
+              aria-label="Delete Comment"
+              onClick={() => { handleRemoveCommentDialogOpen(id); }}
+            >
+              <DeleteIcon />
+            </IconButton>
+            <IconButton
+              aria-label="Edit Comment"
+              onClick={() => { handleEditCommentDialogOpen(id); }}
+            >
+              <EditIcon />
+            </IconButton>
+          </Grid>
+        </CardActions>
       </Thumbnail>
     );
   }
@@ -41,6 +68,8 @@ CommentThumbnail.propTypes = {
   body: PropTypes.string.isRequired,
   voteScore: PropTypes.number.isRequired,
   dispatch: PropTypes.func.isRequired,
+  handleEditCommentDialogOpen: PropTypes.func.isRequired,
+  handleRemoveCommentDialogOpen: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ comments }, { id }) => {
